@@ -1,0 +1,146 @@
+﻿@{
+    ObjectResultAc vl_Acceso = ViewBag.ListarAccesoMenu;
+    var grupos = vl_Acceso.content.GroupBy(item => item.menuNombre);
+}
+<div class="card-body " style="padding: 0px; height: 100vh">
+    <!-- viewer html col-4-->
+    <div class="container mt-5">
+
+        <h1 style="margin-bottom:-0.5em;">Editar Opciones del Menu</h1>
+        <hr>
+        <br>
+
+        <form class="form-inline">
+            <div class="form-check mb-2 mr-sm-2">
+                <label class="form-check-label">
+                    Rol
+                </label>
+            </div>
+
+            <div class="input-group mb-2 mr-sm-2 col-4">
+                <select class="form-control" id="slcRol">
+                    <option value="1">Administrador</option>
+                    <option value="2">Operador</option>
+                </select>
+            </div>
+
+            <button type="submit" class="btn btn-primary mb-2" id="BtnUpdA">Actualizar</button>
+        </form>
+
+        <table class="table table-bordered table-hover" id="tableAccesoPorRol">
+            <thead>
+                <tr style="background-color: #f2f2f2;">
+                    <th style="display: none;">IdMenu</th>
+                    <th>Menu</th>
+                    <th style="display: none;">IdSubMenu</th>
+                    <th>Opción</th>
+                    <th>Estado</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var grupo in grupos)
+                {
+                    <tr>
+                        <td style="display: none;">@grupo.First().idMenu</td>
+                        <td rowspan="@grupo.Count()">@grupo.Key</td>
+                        <td style="display: none;">@grupo.First().idSubmenu</td>
+                        <td>@grupo.First().submenuNombre</td>
+                        <td><input type="checkbox" @(grupo.First().acceso == "1" ? "checked" : "")></td>
+                    </tr>
+                    @foreach (var item in grupo.Skip(1))
+                    {
+                        <tr>
+                            <td style="display: none;">@item.idMenu</td>
+                            <td style="display: none;">@item.idSubmenu</td>
+                            <td>@item.submenuNombre</td>
+                            <td><input type="checkbox" @(item.acceso == "1" ? "checked" : "")></td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+
+    </div>
+</div>
+<script>
+    document.getElementById('slcRol').addEventListener('change', function () {
+        var filtro = this.value;
+        fetch('/OpcionPorRol/ActualizarListado?idRol=' + filtro)
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('tableAccesoPorRol').getElementsByTagName('tbody')[0].innerHTML = data; // Actualizar la tabla
+            });
+    });
+
+    $('#BtnUpdA').click(function (event) {
+        event.preventDefault()
+        var listaEntidades = [];
+        var selectElement = document.getElementById('slcRol');
+        var slcRol = selectElement.value;
+        //var i = 0;
+        //$('#tableAccesoPorRol tr').each(function () {
+        //    console.log(i++);
+        //});
+        //======================================================================
+        //======================================================================
+        $('#tableAccesoPorRol tr').each(function () {
+
+            var fila = {};
+            
+            $(this).find('td').each(function (index, cell) {
+
+                fila['idRol'] = parseInt(slcRol);
+                //requestAcceso.idRol = parseInt(slcRol);
+
+                // Verificar si el elemento actual es un checkbox
+                if ($(cell).find('input[type="checkbox"]').length > 0) {
+                    // Obtener el estado del checkbox (true si está marcado, false si no)
+                    fila['acceso'] = ($(cell).find('input[type="checkbox"]').prop('checked') == true ? "1" : "0");
+                    //requestAcceso.acceso = $(cell).find('input[type="checkbox"]').prop('checked').toString();
+                } else {
+                    // Si no es un checkbox, obtener el texto
+                    var valor = $(cell).text().trim(); // Obtener el valor de la celda y eliminar espacios en blanco
+                    // Verificar si el valor es numérico
+                    if (!isNaN(valor)) {
+                        if (index == 2 || index == 1) {
+                            fila['idSubmenu'] = parseInt(valor); // Convertir a número y agregar a la fila
+                            //requestAcceso.idSubmenu = parseInt(valor);
+                        }
+                        else if (index == 0) {
+                            fila['idMenu'] = parseInt(valor);
+                            //requestAcceso.idMenu = parseInt(valor);
+                        }
+                    }
+                }
+                
+            });
+
+            if (Object.keys(fila).length > 0) {
+                listaEntidades.push(fila); //fila['acceso'] JSON.stringify
+            }
+            
+        });
+        //======================================================================
+        //alert(JSON.stringify(listaEntidades));
+        fetch('/OpcionPorRol/ActualizarAcceso', {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(listaEntidades) //fila
+        })
+            .then(response => response.json())
+            .then(data => {
+                if (data.content == 1) {
+                    swal('Éxito', "Accesos actualizados.", "success");
+                    if (slcRol == 1) {
+                        location.reload();
+                    }
+                }
+            })
+            .catch(error => {
+                console.error
+            });
+    });
+
+</script>

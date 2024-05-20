@@ -1,0 +1,144 @@
+﻿@{
+    ViewData["Title"] = "Proyectos";
+    List<Proyectos> vl_Proyectos = ViewBag.ListarProyectos;
+}
+
+<div class="container mt-5">
+    <h2>Proyectos BIM</h2>
+    <!-- Botón para abrir el modal //Agregar Proyecto -->
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#proyectoModal">
+
+        Cargar Imagen de Proyecto
+    </button>
+
+    <div id="proyectosContainer" class="row mt-3">
+        @foreach (var item in vl_Proyectos)
+        {
+            <div class="card-container card m-2">
+                <div class="tooltip-trigger" title="Creado por: <br/>F. Creado: @item.fechaCreacion <br/> F. Modificado: @item.fechaModificacion" style="height: 200px; width: 250px;" onclick="window.location.href = '/modelos/Index'">
+                    <div class="card-body" style="height: 200px; width: 250px; overflow: hidden; position: relative; text-align: center;">
+                        <button style="position: absolute; top: -4px; right: -4px;" class="btn" onclick="deletebtn(@item.idProyectos)">X</button>
+                        <img src="@item.imagen" alt="Imagen" style="height: 100%; width: 100%; object-fit: cover;">
+                        <h5 class="card-title" style="position: absolute; bottom: 0; left: 0; right: 0; background-color: rgba(255, 255, 255, 0.8); padding: 0px; margin: 0;">@item.cr - @item.nombre</h5>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+<!-- Modal para agregar proyecto -->
+<div class="modal" id="proyectoModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Cargar imagen de Proyecto</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <!-- Formulario para ingresar datos del proyecto -->
+                <form   id="uploadForm" method="post" enctype="multipart/form-data">
+                    <div class="form-group">
+                        <label for="crInput">CR:</label>
+                        <input type="text" class="form-control" id="crInput" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="nombreInput">Nombre:</label>
+                        <input type="text" class="form-control" id="nombreInput" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="descripcionInput">Descripción:</label>
+                        <textarea class="form-control" id="descripcionInput" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="imageFile">Imagen</label>
+                        <input type="file" name="imageFile" id="imageFile" class="form-control">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Agregar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $('.tooltip-trigger').tooltipster({
+            theme: 'tooltipster-shadow',
+            contentAsHTML: true,
+            interactive: true
+        });
+    });
+
+    $('#uploadForm').submit(function (e) {
+        e.preventDefault();
+
+        var formData = new FormData();
+        formData.append('crInput', $('#crInput').val());
+        formData.append('nombreInput', $('#nombreInput').val());
+        formData.append('descripcionInput', $('#descripcionInput').val());
+        formData.append('imageFile', $('#imageFile')[0].files[0]);
+        
+        $.ajax({
+            url: '/Proyectos/Upload', // Reemplaza 'Controller' con el nombre de tu controlador
+            type: 'POST',
+            data: formData,
+            contentType: false,
+            processData: false,
+            success: function (data) {
+                //console.log(data);
+                if (data.content == 1) {
+                    limpiarCampos();
+                    $('#proyectoModal').modal('hide');
+                    location.reload(); //agregarfila();
+                    swal('Éxito', "Proyecto registrado.", "success");
+                }
+            },
+            error: function (error) {
+                // Manejar errores
+                console.log(error);
+            }
+        });
+    });
+
+    function limpiarCampos() {
+        var formulario = document.getElementById('uploadForm');
+        var elementos = formulario.elements;
+
+        for (var i = 0; i < elementos.length; i++) {
+            var tipo = elementos[i].type.toLowerCase();
+            if (tipo === "text" || tipo === "file" || tipo === "textarea") {
+                elementos[i].value = "";
+            }
+        }
+    }
+
+    function deletebtn(IdProy) {
+        Swal.fire({
+            title: "¿Seguro que quieres eliminar proyecto?",
+            showCancelButton: true,
+            confirmButtonText: "Aprobar",
+        }).then((result) => {
+            if (result["value"]) {
+                alert(IdProy);
+                //    fetch('/Usuario/EliminarUsuario?idUsuario=' + IdUsuario + '&estatus=' + (Estado == "A" ? 0 : 1), {
+                //        method: 'PUT'
+                //    })
+                //        .then(response => response.json())
+                //        .then(data => {
+                //            if (data.content == 1) {
+                //                agregarfila();
+                //                Swal.fire("Éxito", "Usuario " + (Estado == "A" ? "Inactivado" : "Activado"), "success");
+                //            }
+                //        })
+                //        .catch(error => {
+                //            console.error('Error:', error);
+                //        });
+
+            }
+        });
+
+        //Swal.fire("Éxito", "Usuario " + (Estado == "A" ? "Inactivado" : "Activado"), "success");
+    }
+</script>

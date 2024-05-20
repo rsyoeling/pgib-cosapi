@@ -1,0 +1,45 @@
+﻿<!--
+<li class="nav-item dropdown dropdown-admin">
+    <a href="#" class="navbar-nav-link dropdown-toggle caret-0" data-toggle="dropdown" aria-expanded="true">
+        ADMINISTRACION
+    </a>
+
+    <div class="dropdown-menu dropdown-menu-left">
+        <a href="#" class="dropdown-item">Roles</a>
+        <a href="#" class="dropdown-item">Usuarios</a>
+        <a href="../OpcionPorRol/Index" class="dropdown-item">Opciones por rol</a>
+    </div>
+</li>
+<li class="nav-item dropdown dropdown-bim">
+    <a href="#" class="navbar-nav-link dropdown-toggle caret-0" data-toggle="dropdown" aria-expanded="true">
+        BIM
+    </a>
+
+    <div class="dropdown-menu dropdown-menu-left">
+        <a href="#" class="dropdown-item">Proyectos</a>
+        <a href="#" class="dropdown-item">Historial</a>
+    </div>
+</li>
+-->
+@for (int i = 0; i < Model.content.menu.Count; i++)
+{
+    <li class="nav-item dropdown dropdown-admin">
+        <a href="#" class="navbar-nav-link dropdown-toggle caret-0" data-toggle="dropdown" aria-expanded="true">
+            @Model.content.menu[i].menuNombre
+        </a>
+        <div class="dropdown-menu dropdown-menu-left">
+            @for (int j = 0; j < Model.content.subMenu.Count; j++)
+            {
+                if (Model.content.subMenu[j].idMenu == Model.content.menu[i].idMenu)
+                {
+                    {
+                        string submenu = Model.content.subMenu[j].submenuNombre;
+                        string url = Model.content.subMenu[j].urlPagina;
+                        <a href="@url" class="dropdown-item">@submenu</a>
+                    }
+                }
+            }
+        </div>
+
+    </li>
+}

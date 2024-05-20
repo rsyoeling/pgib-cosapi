@@ -1,0 +1,266 @@
+﻿@{
+    ResponseUsuario vl_Usuario = ViewBag.ListarUsuario;
+}
+<div class="card-body" style="padding: 0px; height: 100vh">
+    <!-- viewer html col-4-->
+    <div class="container mt-5">
+        <h1 style="margin-bottom:-0.5em;">Mantenimiento de Usuarios</h1>
+        <hr>
+        <br>
+        <div style="text-align: center;">
+            <!--<img src="https://www.w3schools.com/howto/img_avatar.png" alt="Avatar" style="width:200px">-->
+            <img src="~/global_assets/images/img_avatar.png" alt="Avatar" style="width:200px">
+            <!-- <button class="btn btn-success btn-add" onclick="addUser()">Añadir Usuario</button> -->
+        </div>
+        <div class="card-body " style="padding: 0px; height: 100vh">
+            <!-- viewer html -->
+            <div class="container mt-5">
+                <button id="addUserBtn" class="btn btn-primary mb-3" data-toggle="modal" data-target="#addUserModal" onclick="activarNuevo()">Añadir Usuario</button>
+                <table class="table table-bordered table-hover" id="tbMantUsuario">
+                    <thead>
+                        <tr style="background-color: #f2f2f2;">
+                            <th style="display: none;">idUsuario</th>
+                            <th>Usuario</th>
+                            <th>Nombre</th>
+                            <th>Rol</th>
+                            <th>Correo</th>
+                            <th>Estado</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody id="userTable">
+                        @foreach (var item in vl_Usuario.content)
+                        {
+                            <tr>
+                                <td style="display: none;">@item.idUsuario</td>
+                                <td>@item.usuario</td>
+                                <td>@item.nombresCompleto</td>
+                                <td>@item.rolNombre</td>
+                                <td>@item.correoElectronico</td>
+                                <td>@(item.status == 1 ? "A" : "I")</td>
+                                <td>
+                                    <button class="btn btn-primary edit-btn" onclick="editbtn(@item.idUsuario)">Editar</button>
+                                    <button class="btn btn-danger delete-btn" onclick="deletebtn(@item.idUsuario, @item.status == 1 ? 'A' : 'I')">@(item.status == 1 ? "Inactivar" : "Activar")</button>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal" id="addUserModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Añadir Usuario</h5>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="addUserForm">
+                    <input type="hidden" class="form-control" name="IdUsuario" id="IdUsuario">
+                    <div class="form-group">
+                        <label for="Nombres">Nombres</label>
+                        <input type="text" class="form-control" name="Nombres" id="Nombres">
+                    </div>
+                    <div class="form-group">
+                        <label for="ApellidoPaterno">Apellido Paterno</label>
+                        <input type="text" class="form-control" name="ApellidoPaterno" id="ApellidoPaterno">
+                    </div>
+                    <div class="form-group">
+                        <label for="ApellidoMaterno">Apellido Materno</label>
+                        <input type="text" class="form-control" name="ApellidoMaterno" id="ApellidoMaterno">
+                    </div>
+                    <div class="form-group">
+                        <label for="Rol">Rol</label>
+                        <select class="form-control" name="Rol" id="Rol">
+                            <option value=0>--Seleccione--</option>
+                            <option value=1>Administrador</option>
+                            <option value=2>Operador</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="Usuario">Usuario</label>
+                        <input type="text" class="form-control" name="Usuario" id="Usuario">
+                    </div>
+                    <div class="form-group">
+                        <label for="Password">Contraseña</label>
+                        <input type="password" class="form-control" name="Password" id="Password">
+                    </div>
+                    <div class="form-group">
+                        <label for="Correo">Correo</label>
+                        <input type="text" class="form-control" name="Correo" id="Correo">
+                    </div>
+                    <button type="submit" class="btn btn-primary" id="BtnInsUsu">Registrar</button>
+                    <button type="submit" class="btn btn-primary" id="BtnActUsu" style="display:none;">Actualizar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $('#BtnInsUsu').click(function (event) {
+        event.preventDefault();
+        var selectElement = document.getElementById('Rol');
+        var valorSeleccionado = selectElement.value;
+
+        var requestUsuario =@(Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(new RequestUsuario())));
+
+        requestUsuario.nombres = document.getElementById('Nombres').value;
+        requestUsuario.apellidoPaterno = document.getElementById('ApellidoPaterno').value;
+        requestUsuario.apellidoMaterno = document.getElementById('ApellidoMaterno').value;
+        requestUsuario.idRol = parseInt(valorSeleccionado);
+        requestUsuario.usuario = document.getElementById('Usuario').value;
+        requestUsuario.clave = document.getElementById('Password').value;
+        requestUsuario.correoElectronico = document.getElementById('Correo').value;
+
+        //$('#addUserModal').modal('hide');
+        //swal('Éxito', "Usuario registrado.", "success");
+        //agregarfila();
+        //=================================================
+        fetch('/Usuario/InsertarUsuario', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(requestUsuario)
+        })
+            .then(response => response.json())
+            .then(data => {
+                //console.log(data);
+                if (data.content == 1) {
+                    limpiarCampos();
+                    $('#addUserModal').modal('hide');
+                    agregarfila();
+                    swal('Éxito', "Usuario registrado.", "success");
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+
+    });
+
+    function limpiarCampos() {
+        var formulario = document.getElementById('addUserForm');
+        var elementos = formulario.elements;
+
+        for (var i = 0; i < elementos.length; i++) {
+            var tipo = elementos[i].type.toLowerCase();
+            if (tipo === "text" || tipo === "password" || tipo === "hidden") {
+                elementos[i].value = "";
+            } else if (tipo === "select-one") {
+                elementos[i].selectedIndex = 0;
+            }
+        }
+    }
+
+    function activarNuevo() {
+        limpiarCampos();
+        document.getElementById('BtnInsUsu').style.display = 'block';
+        document.getElementById('BtnActUsu').style.display = 'none';
+        document.getElementById('Usuario').disabled = false;
+        document.getElementById('Password').disabled = false;
+    }
+
+    function agregarfila() {
+        fetch('/Usuario/ActualizarListado')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('tbMantUsuario').getElementsByTagName('tbody')[0].innerHTML = data;
+            });
+    }
+
+    function editbtn(IdUsuario) {
+        document.getElementById('BtnInsUsu').style.display = 'none';
+        document.getElementById('BtnActUsu').style.display = 'block';
+        //var userId = this.getAttribute('data-id');
+        document.getElementById('IdUsuario').value = IdUsuario; //userId;
+        fetch('/Usuario/listarusuarioid?idUsuario=' + IdUsuario) //userId
+            .then(response => response.json()) //text()
+            .then(data => {
+                //console.log(data);
+                $('#addUserModal').modal('show');
+
+                data.content.forEach(item => {
+                    document.getElementById('Nombres').value = item.nombres;
+                    document.getElementById('ApellidoPaterno').value = item.apellidoPaterno;
+                    document.getElementById('ApellidoMaterno').value = item.apellidoMaterno;
+                    document.getElementById('Rol').value = item.idRol;
+                    document.getElementById('Usuario').disabled = true;
+                    document.getElementById('Usuario').value = item.usuario;
+                    document.getElementById('Password').disabled = true;
+                    document.getElementById('Password').value = item.clave;
+                    document.getElementById('Correo').value = item.correoElectronico;
+
+                });
+            });
+  }
+
+    $('#BtnActUsu').click(function (event) {
+        event.preventDefault();
+        var selectElement = document.getElementById('Rol');
+        var valorSeleccionado = selectElement.value;
+
+        var requestUsuario =@(Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(new RequestActUsu())));
+
+        requestUsuario.idUsuario = parseInt(document.getElementById('IdUsuario').value);
+        requestUsuario.nombres = document.getElementById('Nombres').value;
+        requestUsuario.apellidoPaterno = document.getElementById('ApellidoPaterno').value;
+        requestUsuario.apellidoMaterno = document.getElementById('ApellidoMaterno').value;
+        requestUsuario.idRol = parseInt(valorSeleccionado);
+        requestUsuario.correoElectronico = document.getElementById('Correo').value;
+
+        fetch('/Usuario/ActualizarUsuario', {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(requestUsuario)
+        })
+            .then(response => response.json())
+            .then(data => {
+                if (data.content == 1) {
+                    limpiarCampos();
+                    $('#addUserModal').modal('hide');
+                    agregarfila();
+                    swal('Éxito', "Usuario actualizado.", "success");
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+    });
+
+    function deletebtn(IdUsuario, Estado) {
+        Swal.fire({
+            title: "¿Seguro que quieres " + (Estado == "A" ? "Inactivar" : "Activar") + " Usuario ?",
+            showCancelButton: true,
+            confirmButtonText: "Aprobar",
+        }).then((result) => {
+            //console.log(result["value"]);
+            //result.isConfirmed
+            if (result["value"]) {
+
+                fetch('/Usuario/EliminarUsuario?idUsuario=' + IdUsuario + '&estatus=' + (Estado == "A" ? 0 : 1), {
+                    method: 'PUT'
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.content == 1) {
+                            agregarfila();
+                            Swal.fire("Éxito", "Usuario " + (Estado == "A" ? "Inactivado" : "Activado"), "success");
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                    });
+
+            }
+        });
+
+        //Swal.fire("Éxito", "Usuario " + (Estado == "A" ? "Inactivado" : "Activado"), "success");
+    }
+
+</script>

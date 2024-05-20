@@ -1,0 +1,32 @@
+﻿<div class="content">
+    <!-- /form inputs -->
+    <style>
+        .card-completo {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            position: relative;
+        }
+    </style>
+    <div class="card" style="padding: 0px">
+        <div class="card-header header-elements-inline">
+            <h5 class="card-title">Lista de Modelos</h5>
+            <div class="content" id="mi_search"></div>
+            <div class="header-elements">
+                <a href="/Modelos/Parametros" class="btn bg-teal-400 rounded-round btn-icon btn-sm mr-3" title="Añadir nuevo elemento">
+                    <span class="letter-icon">➕ </span>
+                </a>
+                <div class="list-icons">
+                    <a class="list-icons-item" data-action="collapse"></a>
+                    <a class="list-icons-item" data-action="reload"></a>
+                    <a class="list-icons-item" data-action="remove"></a>
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+            <div id="grid" class="card-completo"></div>
+        </div>
+    </div>
+</div>
