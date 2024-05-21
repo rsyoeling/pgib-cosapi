@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "G1q0KCpnLhQs+b8JLBZChFMTpjaBXgSRthXM5LD8j4P+BEiGauOtc/L3sH0S6sg31xd5ZpgJvV7fdrplh/KJ3Q==",
+  "dgSpecHash": "sYNAE0Oou9m3/F8elGSOgk/6K4deuCzOoutws7NLK87jG6XhmUJ5uPxBNsfheNOin49UfaboVz+F3iSH4RdHZw==",
   "success": true,
-  "projectFilePath": "F:\\2024\\cosapi\\general\\COSAPI.NETC.PGIB\\COSAPI.NETC.PGIB\\COSAPI.NETC.PGIB.csproj",
+  "projectFilePath": "F:\\2024\\cosapi\\Yoel Rodriguez\\COSAPI.NETC.PGIB\\COSAPI.NETC.PGIB\\COSAPI.NETC.PGIB.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\YOEL\\.nuget\\packages\\microsoft.aspnetcore.html.abstractions\\2.2.0\\microsoft.aspnetcore.html.abstractions.2.2.0.nupkg.sha512",
     "C:\\Users\\YOEL\\.nuget\\packages\\microsoft.aspnetcore.razor\\2.2.0\\microsoft.aspnetcore.razor.2.2.0.nupkg.sha512",
