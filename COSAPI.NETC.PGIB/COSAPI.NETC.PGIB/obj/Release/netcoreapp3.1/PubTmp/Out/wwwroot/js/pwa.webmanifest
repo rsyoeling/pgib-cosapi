@@ -1,0 +1,16 @@
+{
+  "name": "PGIB - PWA",
+  "short_name": "PGIB",
+  "description": "Plataforma de Gestión de la Información BIM",
+  "icons": [
+    {
+      "src": "../img/cosapi_blanco_14.png",
+      "sizes": "144x144",
+      "type": "image/png"
+    }
+  ],
+  "start_url": "/",
+  "display": "standalone",
+  "theme_color": "#764ABC",
+  "background_color": "#764ABC"
+}

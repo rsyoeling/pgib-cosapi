@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+https://go.microsoft.com/fwlink/?LinkID=208121.
+-->
+<Project>
+  <PropertyGroup>
+    <_PublishTargetUrl>F:\2024\cosapi\webcompilado</_PublishTargetUrl>
+    <History>True|2024-05-27T23:06:48.9966154Z||;True|2024-05-27T14:27:52.6669025-05:00||;True|2024-05-27T14:05:40.4658180-05:00||;True|2024-05-27T13:15:25.1346694-05:00||;True|2024-05-27T11:22:04.5583863-05:00||;True|2024-05-27T10:50:07.4092504-05:00||;True|2024-05-26T22:35:54.2744452-05:00||;True|2024-05-26T21:55:34.2851233-05:00||;True|2024-05-24T14:09:58.5450601-05:00||;True|2024-05-24T06:54:43.1958844-05:00||;True|2024-05-24T04:21:25.8639518-05:00||;</History>
+    <LastFailureDetails />
+  </PropertyGroup>
+</Project>

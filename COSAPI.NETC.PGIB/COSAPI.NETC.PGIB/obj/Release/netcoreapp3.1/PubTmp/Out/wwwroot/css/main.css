@@ -1,0 +1,56 @@
+.myAwesomeExtensionIcon {
+    background-image: url(../img/ver_avance_white.png);
+    background-size: 24px;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.handleSelectionExtensionIcon {
+  background-image: url(../img/dar_avance_white.png);
+  background-size: 24px;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.modelSummaryIcon {
+  background-image: url(../img/search_white.png);
+  background-size: 35px;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+.red-bunny {
+  background: red;
+}
+.green-bunny {
+  background: green;
+}
+.blue-bunny {
+  background: blue;
+}
+#dashboard{
+  overflow: auto;
+  height: calc(100vh - 100px);
+}
+
+.transition-width {
+  transition: width 1s ease-in-out;
+}
+
+.dashboardPanel {
+  width: 100%;
+  padding: 3%;
+  display: block;
+}
+div.dataTables_wrapper {
+  width: 800px;
+  margin: 0 15px;
+}
+
+div.ColVis {
+  float: left;
+}
+.adsk-viewing-viewer.dark-theme .adsk-control-group {
+  background-color:rgb(0 78 135);
+  /* background-color: rgb(255, 255, 255);
+  color: rgb(0, 0, 0); */
+}
