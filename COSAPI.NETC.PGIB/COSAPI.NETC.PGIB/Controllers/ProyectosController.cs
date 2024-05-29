@@ -49,38 +49,42 @@ namespace COSAPI.NETC.PGIB.Controllers
         [HttpPost]
         public IActionResult Upload()
         {
-            
-            var cr = HttpContext.Request.Form["crInput"];
-            var nombre = HttpContext.Request.Form["nombreInput"];
-            var descripcion = HttpContext.Request.Form["descripcionInput"];         
-            var file = HttpContext.Request.Form.Files["imageFile"];
-            DateTime fechaActual = DateTime.Now;
-            string fechaFormateada = fechaActual.ToString("dd/MM/yyyy HH:mm");
+            try {
+                var cr = HttpContext.Request.Form["crInput"];
+                var nombre = HttpContext.Request.Form["nombreInput"];
+                var descripcion = HttpContext.Request.Form["descripcionInput"];
+                var file = HttpContext.Request.Form.Files["imageFile"];
+                DateTime fechaActual = DateTime.Now;
+                string fechaFormateada = fechaActual.ToString("yyyy/MM/dd HH:mm");
 
-            var resultado="";
-            ProyectosRequest proyectosRequest = new ProyectosRequest();
-            
-            if (file != null && file.Length > 0)
-            {
-                var fileName = Path.GetFileName(file.FileName);
-                var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/img_proy", fileName);
+                var resultado = "";
+                ProyectosRequest proyectosRequest = new ProyectosRequest();
 
-                using (var stream = new FileStream(filePath, FileMode.Create))
+                if (file != null && file.Length > 0)
                 {
-                    file.CopyTo(stream);
+                    var fileName = Path.GetFileName(file.FileName);
+                    var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/img_proy", fileName);
+
+                    using (var stream = new FileStream(filePath, FileMode.Create))
+                    {
+                        file.CopyTo(stream);
+                    }
+
+                    proyectosRequest.cr = cr;
+                    proyectosRequest.nombre = nombre;
+                    proyectosRequest.descripcion = descripcion;
+                    proyectosRequest.imagen = "../img_proy/" + fileName;
+                    proyectosRequest.usuarioCreacion = idUsuario;
+                    proyectosRequest.fechaCreacion = fechaFormateada;
+                    resultado = ProyectosServices.Insertar_Proyectos(proyectosRequest);
+
                 }
+                //return BadRequest("No se ha seleccionado ningún archivo.");
+                return Ok(resultado);
 
-                proyectosRequest.cr = cr;
-                proyectosRequest.nombre = nombre;
-                proyectosRequest.descripcion = descripcion;
-                proyectosRequest.imagen = "../img_proy/" + fileName;
-                proyectosRequest.usuarioCreacion = idUsuario;
-                proyectosRequest.fechaCreacion = fechaFormateada;
-                resultado = ProyectosServices.Insertar_Proyectos(proyectosRequest);
-
+            } catch (Exception ex) {
+                return Ok(ex);
             }
-            //return BadRequest("No se ha seleccionado ningún archivo.");
-            return Ok(resultado);
         }
 
 

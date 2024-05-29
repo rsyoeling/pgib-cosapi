@@ -8,9 +8,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace COSAPI.NETC.PGIB
 {
@@ -26,10 +23,13 @@ namespace COSAPI.NETC.PGIB
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddRazorPages(); // Agrega Razor Pages al contenedor de servicios
+            services.AddControllersWithViews(); // Agrega MVC al contenedor de servicios
+
             //services.AddControllersWithViews();
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).
-                    AddCookie(CookieAuthenticationDefaults.AuthenticationScheme,
-                    options =>
+                    //AddCookie(CookieAuthenticationDefaults.AuthenticationScheme,
+                    AddCookie(options =>
                     {
                         options.LoginPath = "/Account/LogOn";
                         options.LogoutPath = "/Account/LogOut";
@@ -58,15 +58,8 @@ namespace COSAPI.NETC.PGIB
             //descomentar YR
             //services.Configure<AppSettings>(Configuration.GetSection("AppSettings"));
 
-
             services.AddHttpClient();
-            services.Configure<CookiePolicyOptions>(options =>
-            {
-                // This lambda determines whether user consent for non-essential cookies is needed for a given request.
-                options.CheckConsentNeeded = context => true;
-                options.MinimumSameSitePolicy = SameSiteMode.None;
-            });
-
+            
 
             services.AddMvc().AddSessionStateTempDataProvider();
 
@@ -94,15 +87,19 @@ namespace COSAPI.NETC.PGIB
             //services.AddSingleton<IApplicationConfiguration, ApplicationConfiguration>(
             //    e => Configuration.GetSection("AppSettings")
             //            .Get<ApplicationConfiguration>());
+            //services.AddCors(options =>
+            //{
+            //    options.AddPolicy("AllowAll",
+            //        builder =>
+            //        {
+            //            builder.AllowAnyOrigin()
+            //                   .AllowAnyMethod()
+            //                   .AllowAnyHeader();
+            //        });
+            //});
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Latest);
 
-
-            // authentication 
-            services.AddAuthentication(options =>
-            {
-                options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-            });
 
             //descomentar
             //services.AddTransient(
@@ -134,6 +131,8 @@ namespace COSAPI.NETC.PGIB
             //app.UseHttpsRedirection(); comentado yr
             app.UseStaticFiles();
 
+            //app.UsePathBase("/wwwroot");
+
             app.UseRouting();
 
             //app.UseAuthorization(); comentado yr
@@ -142,11 +141,14 @@ namespace COSAPI.NETC.PGIB
 
             app.UseSession();
 
+            //app.UseCors("AllowAll");
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Account}/{action=LogOn}"); //  {controller=Home}/{action=Index}/{id?}
+                endpoints.MapRazorPages();
             });
         }
     }

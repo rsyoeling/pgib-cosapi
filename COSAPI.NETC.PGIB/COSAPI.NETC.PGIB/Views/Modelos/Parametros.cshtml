@@ -96,6 +96,9 @@
                                         </select>
                                     </div>
                                 </div>
+                                <div class="col-md-2">
+                                    <button type="submit" class="btn btn-primary float-right" id="registrar">Añadir</button>
+                                </div>
                             </div>
 
                             <div class="form-row align-items-end parameter-row">
@@ -131,11 +134,13 @@
                                 </div>
                             </div>
                         </div>
-                        <button type="button" class="btn btn-link" onclick="addParameterRow()">Añadir</button> -->
-                        <button type="submit" class="btn btn-primary float-right" onclick="saveSettingParameters(event)">Guardar</button>
+                        <button type="button" class="btn btn-link" onclick="addParameterRow()">Añadir</button> 
+                        onclick="saveSettingParameters(event)"-->
+                        
                     </form>
                 </div>
             </div>
+            <button type="submit" class="btn btn-primary float-right" id="grabar">Registrar</button>
         </div>
         <div class="col-6" style="height: 100vh">
             <!-- card para visualizar el modelo subido 100 del alto -->
@@ -204,6 +209,7 @@
             }
         });
 
+        
     });
 
     function subirArchivo() {
@@ -425,14 +431,13 @@
 
         return new Promise(function (resolve, reject) {
             // Lógica para lanzar el visor aquí
-            //launchViewer(urn);
-            launchViewer('dXJuOmFkc2sub2JqZWN0czpvcy5vYmplY3Q6dGVzdDJfY2hpbGVfYW50b2ZhZ2FzdGEvMDMtQ1I0MzIwLUJJTS1NT0QtVE9SUkUuQ0FQVEFDSU9OLjQuaWZj');
+            launchViewer(urn);
+            //launchViewer('dXJuOmFkc2sub2JqZWN0czpvcy5vYmplY3Q6dGVzdDJfY2hpbGVfYW50b2ZhZ2FzdGEvMDMtQ1I0MzIwLUJJTS1NT0QtVE9SUkUuQ0FQVEFDSU9OLjQuaWZj');
             // Supongamos que después de lanzar el visor llamamos a resolve para indicar que el proceso ha terminado
             resolve();
         });
 
     }
-
 
     //traer todos los parámetros de get http://localhost:3500/getParametros
     function getParametros() {
@@ -646,4 +651,40 @@
         textbox.prop('disabled', !$(checkbox).is(':checked'));
     }
 
+    var matrizGlobal = [];
+    // Evento click para el botón de guardar
+    $("#registrar").click(function (event) {
+        event.preventDefault();
+
+        var editedValues = [];
+
+        // Recorrer todos los textboxes para encontrar los que están habilitados y editados
+        $("#valoresunicos input[type='text']").each(function () {
+            if (!$(this).prop('disabled')) {
+                // editedValues.push([$(this).val()]);
+                var value = $(this).val();
+                // Comprobar si el valor ya está en la matriz global
+                var isDuplicate = matrizGlobal.some(function (row) {
+                    return row[0] === value;
+                });
+                if (!isDuplicate) {
+                    editedValues.push([value]);
+                }
+            }
+        });
+
+        // Agregar los valores no duplicados a la matriz global
+        matrizGlobal = matrizGlobal.concat(editedValues);
+
+        // Mostrar los valores editados (puedes guardarlos en localStorage o enviarlos al servidor)
+        console.log("Valores global:", matrizGlobal);
+        
+        // Ejemplo de cómo mostrar la matriz en una alerta
+        alert("Valores global:\n" + matrizGlobal.map(row => row[0]).join("\n"));
+    });
+
+    //grabar
+    $("#grabar").click(function (event) {
+        alert();
+    });
 </script>

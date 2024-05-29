@@ -18,7 +18,9 @@ namespace COSAPI.NETC.PGIB.Controllers
         }
         //private static int idUsuario = 0;
         private static int idRol = 0;
-        public IActionResult Index()
+        [HttpGet]
+        [Route("modelos/Index/{idProyecto}")]
+        public IActionResult Index(int idProyecto)
         {
             var oUsuario = _httpContextAccessor.HttpContext.Session.GetString("oUsuario");
             var oUsuarioDeserializado = JsonConvert.DeserializeObject<List<accountStarted>>(oUsuario);
@@ -27,14 +29,17 @@ namespace COSAPI.NETC.PGIB.Controllers
             string menuSubmenu = AccountServices.Cargar_Menu_SubMenu_Por_Rol(idRol);
             Models.ObjectResultMS Model = JsonConvert.DeserializeObject<Models.ObjectResultMS>(menuSubmenu);
 
+            ViewBag.IdProyecto = idProyecto;
+
             return View(Model);
         }
-
-        public IActionResult Parametros()
+        [HttpGet]
+        [Route("modelos/Parametros/{idProyecto}")]
+        public IActionResult Parametros(int idProyecto)
         {
             string menuSubmenu = AccountServices.Cargar_Menu_SubMenu_Por_Rol(idRol);
             Models.ObjectResultMS Model = JsonConvert.DeserializeObject<Models.ObjectResultMS>(menuSubmenu);
-
+            ViewBag.IdProyecto = idProyecto;
             return View(Model);
         }
 

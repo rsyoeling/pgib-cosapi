@@ -237,7 +237,7 @@ namespace Api
                 app.UseSwagger();
                 app.UseSwaggerUI(c =>
                 {
-                    c.SwaggerEndpoint("/swagger/v1/swagger.json", "Api.WebApi.xml");
+                    c.SwaggerEndpoint("../swagger/v1/swagger.json", "Api.WebApi.xml");
                 });
                 Log.Information("swagger will be ready to use at: ip:port/swagger/index.html or domain.com/swagger/index.html");
             }

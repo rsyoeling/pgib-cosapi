@@ -39,7 +39,7 @@ namespace Api.Repository.Impl
                     { "disciplina", "'" + modelosRequest.disciplina + "'"},
                     { "estatus", "'" + modelosRequest.estatus + "'" },
                     { "urn", "'" + modelosRequest.urn + "'" },
-                    { "modeloversion", modelosRequest.modeloversion }, //lógica backend
+                    { "modeloversion", 1 }, //lógica backend modelosRequest.modeloversion
                     { "estado", "'1'" },
                     { "usuarioCreacion", modelosRequest.usuarioCreacion },
                     { "fechaCreacion", "'" + modelosRequest.fechaCreacion + "'" },

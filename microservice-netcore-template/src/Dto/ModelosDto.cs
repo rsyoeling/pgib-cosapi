@@ -12,8 +12,8 @@ namespace Api.Dto
         public string disciplina { get; set; }
         public string estatus { get; set; }
         public string urn { get; set; }
-        public int modeloversion { get; set; }
-        public string estado { get; set; }
+        //public int modeloversion { get; set; }
+        //public string estado { get; set; }
         public int usuarioCreacion { get; set; }
         //public int usuarioModificacion { get; set; }
         public string fechaCreacion { get; set; }

@@ -85,8 +85,7 @@ namespace COSAPI.NETC.PGIB.Models
             string respuesta = "";
 
             try
-            {
-                var options = new RestClientOptions("https://localhost:44388")
+            {   var options = new RestClientOptions("http://10.100.94.14/Rest.Pgib")
                 {
                     MaxTimeout = -1,
                 };
@@ -113,7 +112,7 @@ namespace COSAPI.NETC.PGIB.Models
 
             try
             {
-                var options = new RestClientOptions("https://localhost:44388")
+                var options = new RestClientOptions("http://10.100.94.14/Rest.Pgib")
                 {
                     MaxTimeout = -1,
                 };
@@ -138,7 +137,7 @@ namespace COSAPI.NETC.PGIB.Models
 
             try
             {
-                var options = new RestClientOptions("https://localhost:44388")
+                var options = new RestClientOptions("http://10.100.94.14/Rest.Pgib")
                 {
                     MaxTimeout = -1,
                 };
@@ -161,7 +160,7 @@ namespace COSAPI.NETC.PGIB.Models
 
             try
             {
-                var options = new RestClientOptions("https://localhost:44388")
+                var options = new RestClientOptions("http://10.100.94.14/Rest.Pgib")
                 {
                     MaxTimeout = -1,
                 };

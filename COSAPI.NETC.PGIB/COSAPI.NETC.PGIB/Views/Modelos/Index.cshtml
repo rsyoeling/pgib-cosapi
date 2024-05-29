@@ -15,7 +15,8 @@
             <h5 class="card-title">Lista de Modelos</h5>
             <div class="content" id="mi_search"></div>
             <div class="header-elements">
-                <a href="/Modelos/Parametros" class="btn bg-teal-400 rounded-round btn-icon btn-sm mr-3" title="Añadir nuevo elemento">
+                <!--/Modelos/Parametros/ViewBag.IdProyecto-->
+                <a href="@Url.Action("Parametros", "Modelos", new { idProyecto = ViewBag.IdProyecto })" class="btn bg-teal-400 rounded-round btn-icon btn-sm mr-3" title="Añadir nuevo elemento">
                     <span class="letter-icon">➕ </span>
                 </a>
                 <div class="list-icons">
