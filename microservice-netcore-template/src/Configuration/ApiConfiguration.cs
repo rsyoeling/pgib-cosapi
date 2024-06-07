@@ -8,7 +8,7 @@ namespace Configuration
 
         public ApiConfiguration(IConfiguration config)
         {
-            this.config = config;
+            this.config = config;        
         }
 
         public object GetObjecByAbsoluteKey(string key)
