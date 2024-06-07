@@ -15,10 +15,12 @@
         @foreach (var item in vl_Proyectos)
         {
             <div class="card-container card m-2">
-                <div class="tooltip-trigger" title="Creado por: <br/>F. Creado: @item.fechaCreacion <br/> F. Modificado: @item.fechaModificacion" style="height: 200px; width: 250px;" onclick="window.location.href = '@Url.Action("Index", "Modelos", new { idProyecto = item.idProyectos })'">
+                <div class="tooltip-trigger" title="Creado por: <br/>F. Creado: @item.fechaCreacion <br/> F. Modificado: @item.fechaModificacion" style="height: 200px; width: 250px;">
                     <div class="card-body" style="height: 200px; width: 250px; overflow: hidden; position: relative; text-align: center;">
                         <button style="position: absolute; top: -4px; right: -4px;" class="btn" onclick="deletebtn(@item.idProyectos)">X</button>
-                        <img src="@item.imagen" alt="Imagen" style="height: 100%; width: 100%; object-fit: cover;">
+
+                        <img src="@item.imagen" alt="Imagen" style="height: 100%; width: 100%; object-fit: cover;" onclick="window.location.href = '../modelos/Index/'+ @item.idProyectos">
+
                         <h5 class="card-title" style="position: absolute; bottom: 0; left: 0; right: 0; background-color: rgba(255, 255, 255, 0.8); padding: 0px; margin: 0;">@item.cr - @item.nombre</h5>
                     </div>
                 </div>
@@ -87,14 +89,20 @@
             contentType: false,
             processData: false,
             success: function (data) {
-                console.log(data);
-                var response = JSON.parse(data);
-                console.log('if 1: ' + response.content);
-                if (response.content == 1) {
-                    limpiarCampos();
-                    $('#proyectoModal').modal('hide');
-                    location.reload(); //agregarfila();
-                    swal('Éxito', "Proyecto registrado.", "success");
+                // console.log(data);
+                if (data === null) {
+                    swal('Error', 'Ingrese una imagen en formato correcto.', 'error');
+                } else {
+                    var response = JSON.parse(data);
+                    //console.log('if 1: ' + response.content);
+                    if (response.content == 1) {
+                        limpiarCampos();
+                        $('#proyectoModal').modal('hide');
+                        swal('Éxito', "Proyecto registrado.", "success").then(function () {
+                            location.reload(); //agregarfila();
+                        });
+
+                    }
                 }
             },
             error: function (error) {
@@ -117,6 +125,7 @@
     }
 
     function deletebtn(IdProy) {
+        
         Swal.fire({
             title: "¿Seguro que quieres eliminar proyecto?",
             showCancelButton: true,

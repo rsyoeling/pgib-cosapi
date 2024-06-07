@@ -85,7 +85,8 @@ namespace COSAPI.NETC.PGIB.Models
             string respuesta = "";
 
             try
-            {   var options = new RestClientOptions("http://10.100.94.14/Rest.Pgib")
+            {   
+                var options = new RestClientOptions("http://10.100.94.14/Rest.Pgib")
                 {
                     MaxTimeout = -1,
                 };

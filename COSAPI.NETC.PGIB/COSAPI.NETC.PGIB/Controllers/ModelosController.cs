@@ -16,7 +16,7 @@ namespace COSAPI.NETC.PGIB.Controllers
         {
             _httpContextAccessor = httpContextAccessor;
         }
-        //private static int idUsuario = 0;
+        private static int idUsuario = 0;
         private static int idRol = 0;
         [HttpGet]
         [Route("modelos/Index/{idProyecto}")]
@@ -25,7 +25,7 @@ namespace COSAPI.NETC.PGIB.Controllers
             var oUsuario = _httpContextAccessor.HttpContext.Session.GetString("oUsuario");
             var oUsuarioDeserializado = JsonConvert.DeserializeObject<List<accountStarted>>(oUsuario);
             idRol = oUsuarioDeserializado[0].idRol;
-
+            idUsuario = oUsuarioDeserializado[0].idUsuario;
             string menuSubmenu = AccountServices.Cargar_Menu_SubMenu_Por_Rol(idRol);
             Models.ObjectResultMS Model = JsonConvert.DeserializeObject<Models.ObjectResultMS>(menuSubmenu);
 
@@ -43,5 +43,14 @@ namespace COSAPI.NETC.PGIB.Controllers
             return View(Model);
         }
 
+        [HttpPost]
+        public IActionResult InsertarModelo([FromBody] ModelosRequest modelosRequest)
+        {
+            DateTime fechaActual = DateTime.Now;
+            modelosRequest.usuarioCreacion = idUsuario;
+            modelosRequest.fechaCreacion = fechaActual.ToString("yyyy-MM-dd HH:mm");
+            var resultado = ModelosServices.Insertar_Modelo(modelosRequest);
+            return Ok(resultado);
+        }
     }
 }

@@ -32,8 +32,6 @@
                         <div class="form-group">
                             <label for="archivo">Selecciona un archivo Revit o IFC</label>
 
-
-
                             <div class="custom-file">
                                 <input type="file" class="file-input" id="archivo" name="archivo" accept=".rvt" data-show-preview="false" data-fouc>
                                 <label class="custom-file-label" for="archivo">Elegir archivo...</label>
@@ -55,28 +53,114 @@
                         <button id="btnCargar" type="button" class="btn btn-primary mr-2" onclick="subirArchivo()">Cargar</button>
                         <button id="btnObtenerParámetros" type="button" class="btn btn-primary" onclick="obtenerParametros()" disabled="true">Obtener parámetros</button>
                     </form>
-                    <!-- form para seleccionar parametros a setear -->
-
-                    <form id="formulario" class="mt-3">
-                        <label for="archivo">Selección parámetros Cosapi:</label>
-
-
-                    </form>
-                    <!-- Las preguntas se agregarán aquí -->
-                    <div class="d-flex justify-content-between" id="formParametrizar">
-                        <!--<button id="agregarPregunta" type="button" class="btn btn-primary mt-3">Añadir</button> descomentar YR-->
-                        <button id="btncrearparametros" type="button" class="btn btn-primary mt-3">Crear</button>
-                        <!-- <button id="btnVerModelo" type="button" class="btn btn-primary mt-3">Ver</button> -->
-                    </div>
                 </div>
                 <!-- /form inputs -->
             </div>
             <!-- Sección Configuración de parámetros -->
-            <div class="card mt-4">
-                <div class="card-header">
-                    Configuración de parámetros:
+            <div class="card">
+                <div class="card-header header-elements-inline">
+                    <h5 class="card-title">Configuración de parámetros:</h5>
+                    <div class="header-elements">
+                        <div class="list-icons">
+                            <a class="list-icons-item" data-action="collapse"></a>
+                        </div>
+                    </div>
                 </div>
                 <div class="card-body">
+                    <!-- form para seleccionar parametros a setear -->
+
+                    <form id="formulario" class="mt-3">
+                        <label for="archivo">Parámetro Cosapi</label>
+                        <select id="parametrocosapi" class="form-control">
+                            <option value="0">Seleccione un parámetro</option>
+                            <option value="1">ACTIVIDAD_CRONOGRAMA</option>
+                            <option value="2">ALTURA</option>
+                            <option value="3">AMBIENTE</option>
+                            <option value="4">AREA</option>
+                            <option value="5">AVANCE</option>
+                            <option value="6">CAMPO_FRENTE</option>
+                            <option value="7">CANTIDAD</option>
+                            <option value="8">CODIGO_OBRA</option>
+                            <option value="9">COD_AMBIENTE</option>
+                            <option value="10">COD_CONSULTA</option>
+                            <option value="11">COD_INTERFERENCIA</option>
+                            <option value="12">COD_TIPICO_ELEMENTO</option>
+                            <option value="13">COTA_INFERIOR</option>
+                            <option value="14">COTA_SUPERIOR</option>
+                            <option value="15">CUADRILLA</option>
+                            <option value="16">DESCRIPCION_AREA</option>
+                            <option value="17">DESCRIPCION_ELEMENTO</option>
+                            <option value="18">DESCRIPCION_ELEMENTO_PRINCIPAL</option>
+                            <option value="19">DESCRIPCION_FRENTE</option>
+                            <option value="20">DESCRIPCION_LOTE</option>
+                            <option value="21">DESCRIPCION_PARTIDA</option>
+                            <option value="22">DESCRIPCION_SECTOR</option>
+                            <option value="23">DESCRIPCION_SUBLOTE</option>
+                            <option value="24">DESCRIPCION_WBS_NIVEL_1</option>
+                            <option value="25">DESCRIPCION_WBS_NIVEL_2</option>
+                            <option value="26">DESCRIPCION_WBS_NIVEL_3</option>
+                            <option value="27">DESCRIPCION_WBS_NIVEL_4</option>
+                            <option value="28">DESCRIPCION_WBS_NIVEL_5</option>
+                            <option value="29">DIM_A</option>
+                            <option value="30">DIM_B</option>
+                            <option value="31">DIM_C</option>
+                            <option value="32">EJECUTADO</option>
+                            <option value="33">EJE_H</option>
+                            <option value="34">EJE_V</option>
+                            <option value="35">ESPECIFICACION_TECNICA</option>
+                            <option value="36">ESTADO_AVANCE</option>
+                            <option value="37">ESTATUS_MODELADO</option>
+                            <option value="38">EST_DIMENSION</option>
+                            <option value="39">EST_MODELADO</option>
+                            <option value="40">EST_TIPO</option>
+                            <option value="41">EST_UBICACION</option>
+                            <option value="42">EXPORTAR</option>
+                            <option value="43">FACTOR</option>
+                            <option value="44">FASE</option>
+                            <option value="45">FASEO</option>
+                            <option value="46">FECHA_EJECUTADA</option>
+                            <option value="47">FECHA_PLANIFICADA</option>
+                            <option value="48">HOST</option>
+                            <option value="49">H_V</option>
+                            <option value="50">ID_CRONOGRAMA</option>
+                            <option value="51">ID_ELEMENTO</option>
+                            <option value="52">ID_EXTERNAL</option>
+                            <option value="53">ID_PARTIDA</option>
+                            <option value="54">INSTALACION</option>
+                            <option value="55">IRREGULAR</option>
+                            <option value="56">LOTE</option>
+                            <option value="57">MARCA_ELEMENTO</option>
+                            <option value="58">MARCA_ELEMENTO_PRINCIPAL</option>
+                            <option value="59">MOD_INSTALACION</option>
+                            <option value="60">MONTO_FINAL</option>
+                            <option value="61">NIVEL</option>
+                            <option value="62">PLANO_CONSTRUCCION</option>
+                            <option value="63">PLANO_DETALLE</option>
+                            <option value="64">PU</option>
+                            <option value="65">RESPONSABLE</option>
+                            <option value="66">REV_PLANO_CONSTRUCCION</option>
+                            <option value="67">REV_PLANO_DETALLE</option>
+                            <option value="68">RUBRO</option>
+                            <option value="69">SECTOR</option>
+                            <option value="70">SECUENCIA</option>
+                            <option value="71">SISTEMA</option>
+                            <option value="72">SUBLOTE</option>
+                            <option value="73">UBICACION</option>
+                            <option value="74">UNIDAD</option>
+                            <option value="75">WBS_NIVEL_1</option>
+                            <option value="76">WBS_NIVEL_2</option>
+                            <option value="77">WBS_NIVEL_3</option>
+                            <option value="78">WBS_NIVEL_4</option>
+                            <option value="79">WBS_NIVEL_5</option>
+                        </select>
+                    </form>
+                    <!-- Las preguntas se agregarán aquí -->
+                    <div class="d-flex justify-content-between" id="formParametrizar">
+                        <!--<button id="agregarPregunta" type="button" class="btn btn-primary mt-3">Añadir</button> descomentar YR-->
+                        <button id="btncrearparametros" type="button" class="btn btn-primary mt-3">Cargar</button>
+                        <!-- <button id="btnVerModelo" type="button" class="btn btn-primary mt-3">Ver</button> -->
+                    </div>
+
                     <form>
                         <div id="parameters-container">
                             <div class="form-row align-items-end parameter-row">
@@ -84,20 +168,22 @@
                                     <div class="form-group">
                                         <label>Grupo</label>
                                         <select id="grupo" class="form-control">
-                                            <option value="">Selecciona una opción</option>
+                                            <option value="0">Selecciona una opción</option>
                                         </select>
                                     </div>
                                 </div>
                                 <div class="col-md-5">
                                     <div class="form-group">
-                                        <label>Parámetro</label>
+                                        <label>Parámetro BIM</label>
                                         <select id="parambim" class="form-control">
-                                            <option value="">Selecciona una opción</option>
+                                            <option value="0">Selecciona una opción</option>
                                         </select>
                                     </div>
                                 </div>
-                                <div class="col-md-2">
-                                    <button type="submit" class="btn btn-primary float-right" id="registrar">Añadir</button>
+                                <div class="col-2-md-5">
+                                    <div class="form-group">
+                                        <button type="submit" class="btn btn-primary" id="registrar">Asignar</button>
+                                    </div>
                                 </div>
                             </div>
 
@@ -230,6 +316,7 @@
 
         const bucketKey = 'test2_chile_antofagasta'; // Reemplaza con el nombre de tu bucket en Autodesk Forge
         const objectName = file.name;
+        localStorage.setItem('modelname', objectName);
         //console.log(objectName); YR
         const apiUrl = `https://developer.api.autodesk.com/oss/v2/buckets/${bucketKey}/objects/${objectName}`;
 
@@ -592,7 +679,7 @@
         //var groupName = "Constraints";
 
         $('#parambim').empty();
-
+        $("#parambim").append('<option value="0">Selecciona una opción</option>');
         // Recorrer las claves del grupo seleccionado
         Object.keys(data[selectedValue]).forEach(function (key) {
             //console.log("parámetros: " + key);
@@ -661,14 +748,22 @@
         // Recorrer todos los textboxes para encontrar los que están habilitados y editados
         $("#valoresunicos input[type='text']").each(function () {
             if (!$(this).prop('disabled')) {
-                // editedValues.push([$(this).val()]);
                 var value = $(this).val();
+
                 // Comprobar si el valor ya está en la matriz global
                 var isDuplicate = matrizGlobal.some(function (row) {
-                    return row[0] === value;
+                    return row.valor === value;
                 });
+
                 if (!isDuplicate) {
-                    editedValues.push([value]);
+                    var filaMatrizGlobal = {}; // Crear una nueva instancia para cada fila
+
+                    filaMatrizGlobal['parametro_cosapi'] = $('#parametrocosapi').val();
+                    filaMatrizGlobal['grupo'] = $('#grupo').val();
+                    filaMatrizGlobal['parametro'] = $('#parambim').val();
+                    filaMatrizGlobal['valor'] = value;
+
+                    editedValues.push(filaMatrizGlobal); // Agregar la nueva fila a editedValues
                 }
             }
         });
@@ -678,13 +773,37 @@
 
         // Mostrar los valores editados (puedes guardarlos en localStorage o enviarlos al servidor)
         console.log("Valores global:", matrizGlobal);
-        
-        // Ejemplo de cómo mostrar la matriz en una alerta
-        alert("Valores global:\n" + matrizGlobal.map(row => row[0]).join("\n"));
+
+        alert(JSON.stringify(matrizGlobal)); // Mostrar los valores globales en una alerta
     });
 
-    //grabar
     $("#grabar").click(function (event) {
-        alert();
+        event.preventDefault();
+
+        var modelosRequest = @(Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(new ModelosRequest())));
+
+        modelosRequest.idProyectos = @ViewBag.IdProyecto;
+        modelosRequest.modelo = localStorage.getItem('modelname');
+        modelosRequest.disciplina = $('#disciplina').val();
+        modelosRequest.estatus = "";
+        modelosRequest.urn = localStorage.getItem('urn');
+        modelosRequest.Parametros = matrizGlobal;
+
+        // Realiza una solicitud fetch al endpoint '/Modelos/InsertarModelo'
+        fetch('@Url.Action("InsertarModelo", "Modelos")', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(modelosRequest)
+        })
+            .then(response => response.json())
+            .then(data => {
+                if (data.content == 1) {
+                    swal('Éxito', "Accesos actualizados.", "success");
+                } else {
+                    swal('Error', 'Comuniquese con el área informáica: ' + data, 'error');
+                }
+            });
     });
 </script>
