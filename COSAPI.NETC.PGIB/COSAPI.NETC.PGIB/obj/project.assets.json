@@ -6520,23 +6520,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\YOEL\\.nuget\\packages\\": {},
-    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
+    "C:\\Users\\Usuario\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "F:\\2024\\cosapi\\Yoel Rodriguez\\COSAPI.NETC.PGIB\\COSAPI.NETC.PGIB\\COSAPI.NETC.PGIB.csproj",
+      "projectUniqueName": "D:\\cosapi\\Yoel Rodriguez\\COSAPI.NETC.PGIB\\COSAPI.NETC.PGIB\\COSAPI.NETC.PGIB.csproj",
       "projectName": "COSAPI.NETC.PGIB",
-      "projectPath": "F:\\2024\\cosapi\\Yoel Rodriguez\\COSAPI.NETC.PGIB\\COSAPI.NETC.PGIB\\COSAPI.NETC.PGIB.csproj",
-      "packagesPath": "C:\\Users\\YOEL\\.nuget\\packages\\",
-      "outputPath": "F:\\2024\\cosapi\\Yoel Rodriguez\\COSAPI.NETC.PGIB\\COSAPI.NETC.PGIB\\obj\\",
+      "projectPath": "D:\\cosapi\\Yoel Rodriguez\\COSAPI.NETC.PGIB\\COSAPI.NETC.PGIB\\COSAPI.NETC.PGIB.csproj",
+      "packagesPath": "C:\\Users\\Usuario\\.nuget\\packages\\",
+      "outputPath": "D:\\cosapi\\Yoel Rodriguez\\COSAPI.NETC.PGIB\\COSAPI.NETC.PGIB\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-      ],
       "configFilePaths": [
-        "C:\\Users\\YOEL\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Usuario\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [

@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+https://go.microsoft.com/fwlink/?LinkID=208121.
+-->
+<Project>
+  <PropertyGroup>
+    <_PublishTargetUrl>D:\cosapi\compilado-pgib\frontend</_PublishTargetUrl>
+    <History>True|2024-06-05T00:53:55.9478875Z||;True|2024-06-04T19:43:48.4131058-05:00||;True|2024-06-04T19:32:39.7942905-05:00||;True|2024-06-04T09:28:17.3917982-05:00||;True|2024-06-04T09:27:24.1605149-05:00||;True|2024-06-03T20:56:22.6034599-05:00||;True|2024-06-03T12:01:38.1604268-05:00||;True|2024-06-03T11:50:04.4323971-05:00||;True|2024-05-30T10:40:58.3024814-05:00||;</History>
+    <LastFailureDetails />
+  </PropertyGroup>
+</Project>
