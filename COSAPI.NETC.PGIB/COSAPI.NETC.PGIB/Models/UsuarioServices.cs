@@ -1,4 +1,5 @@
-﻿using RestSharp;
+﻿using COSAPI.NETC.PGIB.Utils;
+using RestSharp;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -65,7 +66,7 @@ namespace COSAPI.NETC.PGIB.Models
 
             try
             {
-                var options = new RestClientOptions("http://10.100.94.14/Rest.Pgib")
+                var options = new RestClientOptions(ConstantesApp.UrlBase)
                 {
                     MaxTimeout = -1,
                 };
@@ -88,7 +89,7 @@ namespace COSAPI.NETC.PGIB.Models
 
             try
             {
-                var options = new RestClientOptions("http://10.100.94.14/Rest.Pgib")
+                var options = new RestClientOptions(ConstantesApp.UrlBase)
                 {
                     MaxTimeout = -1,
                 };
@@ -111,7 +112,7 @@ namespace COSAPI.NETC.PGIB.Models
 
             try
             {
-                var options = new RestClientOptions("http://10.100.94.14/Rest.Pgib")
+                var options = new RestClientOptions(ConstantesApp.UrlBase)
                 {
                     MaxTimeout = -1,
                 };
@@ -145,7 +146,7 @@ namespace COSAPI.NETC.PGIB.Models
 
             try
             {
-                var options = new RestClientOptions("http://10.100.94.14/Rest.Pgib")
+                var options = new RestClientOptions(ConstantesApp.UrlBase)
                 {
                     MaxTimeout = -1,
                 };
@@ -176,7 +177,7 @@ namespace COSAPI.NETC.PGIB.Models
 
             try
             {
-                var options = new RestClientOptions("http://10.100.94.14/Rest.Pgib")
+                var options = new RestClientOptions(ConstantesApp.UrlBase)
                 {
                     MaxTimeout = -1,
                 };

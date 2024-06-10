@@ -10,5 +10,11 @@ namespace Api.Services
     public interface IModelosService
     {
         ObjectResult Insertar_Modelos(ModelosRequest modelosRequest);
+
+        List<ModeloResponse> Listar_ModeloPorProyecto(int idProyecto);
+
+        ObjectResult EliminarModelo(int idModelo);
+
+        ModeloResponse Buscar_ModeloPorId(int idModelo);
     }
 }

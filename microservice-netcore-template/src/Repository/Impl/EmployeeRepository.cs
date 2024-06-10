@@ -35,7 +35,8 @@ namespace Api.Repository.Impl
 
             try
             {                
-                return databaseManager.LookupDatabaseConnectorById(ApiConstants.osilDatabaseId).Query<EvaluacionBE>("silac.PKG_EXAMENES.sp_listar_evaluacion", parameters);
+                return databaseManager.LookupDatabaseConnectorById(ApiConstants.osilDatabaseId).
+                    Query<EvaluacionBE>("silac.PKG_EXAMENES.sp_listar_evaluacion", parameters);
             }
             catch (Exception e)
             {

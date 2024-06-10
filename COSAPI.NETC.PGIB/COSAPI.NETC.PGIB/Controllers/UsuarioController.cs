@@ -31,6 +31,7 @@ namespace COSAPI.NETC.PGIB.Controllers
 
             return View(Model);
         }
+
         [HttpPost]
         public IActionResult InsertarUsuario([FromBody] RequestUsuario requestUsuario)
         {

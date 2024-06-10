@@ -36,5 +36,29 @@ namespace Api.Controllers
             return Ok(vins);
         }
 
+        [HttpGet]
+        [Route("/v1/modelos/listarModeloPorProyecto")]
+        public ActionResult Listar_ModeloPorProyecto(int idProyecto)
+        {
+            var list = this.ModelosService.Listar_ModeloPorProyecto(idProyecto);
+            return Ok(list);
+        }
+
+        [HttpGet]
+        [Route("/v1/modelos/buscarModeloPorId")]
+        public ActionResult Buscar_ModeloPorId(int idModelo)
+        {
+            var list = this.ModelosService.Buscar_ModeloPorId(idModelo);
+            return Ok(list);
+        }
+
+        [HttpDelete]
+        [Route("/v1/modelos/eliminarModelo")]
+        public ActionResult Eliminar_Modelos(int idModelo)
+        {
+            var vins = this.ModelosService.EliminarModelo(idModelo);
+            return Ok(vins);
+        }
+
     }
 }

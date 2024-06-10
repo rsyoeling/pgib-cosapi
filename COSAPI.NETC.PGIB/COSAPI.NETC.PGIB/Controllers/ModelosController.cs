@@ -30,9 +30,29 @@ namespace COSAPI.NETC.PGIB.Controllers
             Models.ObjectResultMS Model = JsonConvert.DeserializeObject<Models.ObjectResultMS>(menuSubmenu);
 
             ViewBag.IdProyecto = idProyecto;
-
+            ViewBag.listModelos = ModelosServices.ListarModelosPorProyecto(idProyecto);
             return View(Model);
         }
+
+        public JsonResult GetModelos(int idProyecto)
+        {
+            var modelos = ModelosServices.ListarModelosPorProyecto(idProyecto);
+            return Json(modelos);
+        }
+
+        [HttpDelete]
+        public IActionResult EliminarModelo(int idModelo)
+        {
+            var resultado = ModelosServices.Eliminar_Modelo(idModelo);
+            return Ok(resultado);
+        }
+
+        public JsonResult GetParametrosPorModelo(int idModelo)
+        {
+            var modelos = ParametrosServices.ListarParametrosPorModelo(idModelo);
+            return Json(modelos);
+        }
+
         [HttpGet]
         [Route("modelos/Parametros/{idProyecto}")]
         public IActionResult Parametros(int idProyecto)
@@ -40,8 +60,30 @@ namespace COSAPI.NETC.PGIB.Controllers
             string menuSubmenu = AccountServices.Cargar_Menu_SubMenu_Por_Rol(idRol);
             Models.ObjectResultMS Model = JsonConvert.DeserializeObject<Models.ObjectResultMS>(menuSubmenu);
             ViewBag.IdProyecto = idProyecto;
+            ViewBag.ListParametrosCosapi = ParametroCosapiServices.ListarParametrosCosapi();
+
             return View(Model);
         }
+
+        [HttpGet]
+        [Route("modelos/Parametros/Edit/{idModelo}")]
+        public IActionResult EditarParametros(int idModelo)
+        {
+            string menuSubmenu = AccountServices.Cargar_Menu_SubMenu_Por_Rol(idRol);
+            Models.ObjectResultMS Model = JsonConvert.DeserializeObject<Models.ObjectResultMS>(menuSubmenu);
+            ModeloResponse objModelo = ModelosServices.Buscar_ModeloPorId(idModelo);
+
+            if (objModelo != null)
+            {
+                ViewBag.ListParametrosCosapi = ParametroCosapiServices.ListarParametrosCosapi();
+                ViewBag.IdModelo = idModelo;
+                ViewBag.modelo = objModelo;
+                return View(Model);
+            }
+
+            return Redirect("/Proyectos/Index");
+        }
+
 
         [HttpPost]
         public IActionResult InsertarModelo([FromBody] ModelosRequest modelosRequest)

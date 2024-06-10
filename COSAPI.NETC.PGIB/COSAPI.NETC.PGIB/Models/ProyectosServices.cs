@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using COSAPI.NETC.PGIB.Utils;
+using Microsoft.AspNetCore.Http;
 using RestSharp;
 using System;
 using System.Collections.Generic;
@@ -49,7 +50,7 @@ namespace COSAPI.NETC.PGIB.Models
 
             try
             {
-                var options = new RestClientOptions("http://10.100.94.14/Rest.Pgib")
+                var options = new RestClientOptions(ConstantesApp.UrlBase)
                 {
                     MaxTimeout = -1,
                 };
@@ -72,8 +73,7 @@ namespace COSAPI.NETC.PGIB.Models
 
             try
             {
-                //https://localhost:44388/
-                var options = new RestClientOptions("http://10.100.94.14/Rest.Pgib")
+                var options = new RestClientOptions(ConstantesApp.UrlBase)
                 {
                     MaxTimeout = -1,
                 };

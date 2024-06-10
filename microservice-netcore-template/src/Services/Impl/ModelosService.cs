@@ -36,5 +36,41 @@ namespace Api.Services.Impl
             }
         }
 
+        public ObjectResult EliminarModelo(int idModelo)
+        {
+            try
+            {
+                return this.ModelosRepository.EliminarModelo(idModelo);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Failed to fetch Insertar_Modelos.", ex);
+            }
+        }
+
+        public List<ModeloResponse> Listar_ModeloPorProyecto(int idProyecto)
+        {
+            try
+            {
+                return this.ModelosRepository.Listar_ModeloPorProyecto(idProyecto);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Failed to fetch Listar_ModeloPorProyecto.", ex);
+            }
+            
+        }
+
+        public ModeloResponse Buscar_ModeloPorId(int idModelo)
+        {
+            try
+            {
+                return this.ModelosRepository.Buscar_ModeloPorId(idModelo);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Failed to fetch Buscar_ModeloPorId.", ex);
+            }
+        }
     }
 }

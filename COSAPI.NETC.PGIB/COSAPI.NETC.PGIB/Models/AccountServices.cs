@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using COSAPI.NETC.PGIB.Utils;
+using Newtonsoft.Json;
 using RestSharp;
 using System;
 using System.Collections.Generic;
@@ -80,13 +81,14 @@ namespace COSAPI.NETC.PGIB.Models
 
     public class AccountServices
     {
+
         public static string Usuario_Login_Sel(string usuario, string clave)
         {
             string respuesta = "";
 
             try
             {   
-                var options = new RestClientOptions("http://10.100.94.14/Rest.Pgib")
+                var options = new RestClientOptions(ConstantesApp.UrlBase)
                 {
                     MaxTimeout = -1,
                 };
@@ -113,7 +115,7 @@ namespace COSAPI.NETC.PGIB.Models
 
             try
             {
-                var options = new RestClientOptions("http://10.100.94.14/Rest.Pgib")
+                var options = new RestClientOptions(ConstantesApp.UrlBase)
                 {
                     MaxTimeout = -1,
                 };
@@ -138,7 +140,7 @@ namespace COSAPI.NETC.PGIB.Models
 
             try
             {
-                var options = new RestClientOptions("http://10.100.94.14/Rest.Pgib")
+                var options = new RestClientOptions(ConstantesApp.UrlBase)
                 {
                     MaxTimeout = -1,
                 };
@@ -161,7 +163,7 @@ namespace COSAPI.NETC.PGIB.Models
 
             try
             {
-                var options = new RestClientOptions("http://10.100.94.14/Rest.Pgib")
+                var options = new RestClientOptions(ConstantesApp.UrlBase)
                 {
                     MaxTimeout = -1,
                 };

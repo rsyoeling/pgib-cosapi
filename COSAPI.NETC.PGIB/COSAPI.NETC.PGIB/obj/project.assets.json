@@ -6520,19 +6520,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Usuario\\.nuget\\packages\\": {}
+    "C:\\Users\\Computer\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\cosapi\\Yoel Rodriguez\\COSAPI.NETC.PGIB\\COSAPI.NETC.PGIB\\COSAPI.NETC.PGIB.csproj",
+      "projectUniqueName": "C:\\Users\\Computer\\Desktop\\pgib-cosapi\\COSAPI.NETC.PGIB\\COSAPI.NETC.PGIB\\COSAPI.NETC.PGIB.csproj",
       "projectName": "COSAPI.NETC.PGIB",
-      "projectPath": "D:\\cosapi\\Yoel Rodriguez\\COSAPI.NETC.PGIB\\COSAPI.NETC.PGIB\\COSAPI.NETC.PGIB.csproj",
-      "packagesPath": "C:\\Users\\Usuario\\.nuget\\packages\\",
-      "outputPath": "D:\\cosapi\\Yoel Rodriguez\\COSAPI.NETC.PGIB\\COSAPI.NETC.PGIB\\obj\\",
+      "projectPath": "C:\\Users\\Computer\\Desktop\\pgib-cosapi\\COSAPI.NETC.PGIB\\COSAPI.NETC.PGIB\\COSAPI.NETC.PGIB.csproj",
+      "packagesPath": "C:\\Users\\Computer\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Computer\\Desktop\\pgib-cosapi\\COSAPI.NETC.PGIB\\COSAPI.NETC.PGIB\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Usuario\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Computer\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -6540,7 +6540,6 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-        "C:\\Program Files\\dotnet\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -6592,7 +6591,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.300\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.203\\RuntimeIdentifierGraph.json"
       }
     }
   }

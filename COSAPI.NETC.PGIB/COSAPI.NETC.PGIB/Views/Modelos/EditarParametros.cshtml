@@ -1,0 +1,667 @@
+﻿@{
+    ModeloResponse vl_Modelo = ViewBag.modelo;
+    List<ParametroCosapi> vl_ListParametrosCosapi = ViewBag.ListParametrosCosapi;
+}
+
+
+<!-- añadir viewer forge autodesk -->
+<link rel="stylesheet" href="https://developer.api.autodesk.com/modelderivative/v2/viewers/7.*/style.min.css" type="text/css">
+<script src="https://developer.api.autodesk.com/modelderivative/v2/viewers/7.*/viewer3D.min.js"></script>
+
+<!-- Extensiones -->
+<script src="~/js/myawesomeextension_2.js"></script>
+<script src="~/js/myawesomeextension.js"></script>
+<script src="~/js/forge-js/ForgeViewer_1.js"></script>
+<script src="~/js/handleselectionextension.js"></script>
+
+<div class="content">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card">
+                <div class="card-header header-elements-inline">
+                    <h5 class="card-title">Parametros Registrados</h5>
+                    <div class="header-elements">
+                        <div class="list-icons">
+                            <a class="list-icons-item" data-action="collapse"></a>
+                            <a class="list-icons-item" data-action="remove"></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div id="resultado"></div>
+                </div>
+             </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-6">
+            <!-- Form inputs -->
+            <div class="card">
+                <div class="card-header header-elements-inline">
+                    <h5 class="card-title">Subir Modelos</h5>
+                    <div class="header-elements">
+                        <div class="list-icons">
+
+                            <a class="list-icons-item" data-action="collapse"></a>
+                            <a class="list-icons-item" data-action="reload"></a>
+                            <a class="list-icons-item" data-action="remove"></a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-body">
+                    <!-- form para cargar archivo -->
+                    <form id="uploadForm">
+                        <div class="form-group">
+                            <label for="archivo">Selecciona un archivo Revit o IFC</label>
+                            <div class="custom-file">
+                                <input type="file" class="file-input" id="archivo" name="archivo" accept=".rvt" data-show-preview="false" data-fouc disabled="true">
+                                <label class="custom-file-label" for="archivo">Elegir archivo...</label>
+                            </div>
+
+                            <hr>
+                            <label for="archivo">Indicar disciplina del modelo</label>
+                            <input value="@vl_Modelo.disciplina" type="text" class="form-control" name="disciplina" id="disciplina">
+                        </div>
+                        <button id="btnObtenerParámetros" type="button" class="btn btn-primary" onclick="obtenerParametros()" disabled="true">Obtener parámetros</button>
+                    </form>
+                </div>
+                <!-- /form inputs -->
+            </div>
+            <!-- Sección Configuración de parámetros -->
+            <div class="card">
+                <div class="card-header header-elements-inline">
+                    <h5 class="card-title">Configuración de parámetros:</h5>
+                    <div class="header-elements">
+                        <div class="list-icons">
+                            <a class="list-icons-item" data-action="collapse"></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <!-- form para seleccionar parametros a setear -->
+
+                    <form id="formulario" class="mt-3">
+                        <label for="archivo">Parámetro Cosapi</label>
+                        <select id="parametrocosapi" class="form-control">
+                            <option value="0">Seleccione un parámetro</option>
+                            @foreach (var parametro in vl_ListParametrosCosapi)
+                            {
+                                <option value="@parametro.idParametroCosapi">@parametro.descripcion</option>
+                            }
+                        </select>
+                    </form>
+
+                    <!-- Las preguntas se agregarán aquí -->
+                    <div class="d-flex justify-content-between" id="formParametrizar">
+                        <!--<button id="agregarPregunta" type="button" class="btn btn-primary mt-3">Añadir</button> descomentar YR-->
+                        <button id="btncrearparametros" type="button" class="btn btn-primary mt-3" disabled="true">Cargar</button>
+                        <!-- <button id="btnVerModelo" type="button" class="btn btn-primary mt-3">Ver</button> -->
+                    </div>
+
+                    <form>
+                        <div id="parameters-container">
+                            <div class="form-row align-items-end parameter-row">
+                                <div class="col-md-5">
+                                    <div class="form-group">
+                                        <label>Grupo</label>
+                                        <select id="grupo" class="form-control">
+                                            <option value="0">Selecciona una opción</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-5">
+                                    <div class="form-group">
+                                        <label>Parámetro BIM</label>
+                                        <select id="parambim" class="form-control">
+                                            <option value="0">Selecciona una opción</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-2-md-5">
+                                    <div class="form-group">
+                                        <button type="submit" class="btn btn-primary" id="registrar">Asignar</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-row align-items-end parameter-row">
+                                <div class="col-md-5">
+                                    <div class="form-group" id="valoresunicos">
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                     </form>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary float-right" id="grabar">Actualizar</button>
+        </div>
+        <div class="col-6" style="height: 100vh">
+            <!-- card para visualizar el modelo subido 100 del alto -->
+            <!-- estilos para abarcar todo el ancho -->
+            <style>
+                #viewer {
+                    width: 100%;
+                    height: 100%;
+                    margin: 0;
+                    padding: 0;
+                    overflow: hidden;
+                    position: relative;
+                }
+            </style>
+
+            <div class="card" style="height: 100vh">
+                <div class="card-header header-elements-inline">
+                    <h5 class="card-title">Visor:</h5>
+                    <div class="header-elements">
+                        <div class="list-icons">
+
+                            <a class="list-icons-item" data-action="collapse"></a>
+                            <a class="list-icons-item" data-action="reload"></a>
+                            <a class="list-icons-item" data-action="remove"></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <!-- div para visualizar el modelo -->
+                    <div id="viewer"></div>
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+</div>
+<script>
+    $(document).ready(function () {
+
+
+        //obtener token forge autodesk
+        var token = "";
+        var url = "https://developer.api.autodesk.com/authentication/v1/authenticate";
+        var data = {
+            "client_id": "wIHjqGVk5Geso1ZGaLFpsqU0UiX7UP4j",
+            "client_secret": "4nc2icC3F8fKlQkX",
+            "grant_type": "client_credentials",
+            "scope": "code:all data:write data:read bucket:create bucket:delete bucket:read"
+        };
+        $.ajax({
+            url: url,
+            type: "POST",
+            data: data,
+            success: function (data) {
+
+                token = data.access_token;
+                //guardar token en variable de sesion
+                localStorage.setItem("token", 'Bearer ' + token);
+                //console.log(token);
+            },
+            error: function (data) {
+                console.log(data);
+            }
+        });
+
+
+    });
+
+   
+
+    // obtener el estado del trabajo
+    function obtenerEstadoTrabajo() {
+        const token = localStorage.getItem('token');
+        const urn = localStorage.getItem('urn');
+        const apiUrl = `https://developer.api.autodesk.com/modelderivative/v2/designdata/${urn}/manifest`;
+        fetch(apiUrl, {
+            method: 'GET',
+            headers: {
+                'Authorization': token,
+            },
+        })
+            .then(response => response.json())
+            .then(data => {
+                //console.log('obtenerEstadoTrabajo: ' + data);
+                // Obtener el estado del trabajo
+                const status = data.status;
+                if (status === 'inprogress') {
+                    setTimeout(() => {
+                        obtenerEstadoTrabajo();
+                    }, 5000);
+
+                } else if (status === 'success') {
+                    // Si el trabajo ha finalizado correctamente, obtener los parámetros
+                   
+                    var urn = localStorage.getItem('urn');
+                    mostrarModelo(urn).then(function () {
+                        // Proceso terminado, mostrar mensaje
+                        console.log('Proceso terminado');
+                    })
+                        .catch(function (error) {
+                            // Manejar cualquier error que pueda ocurrir durante el proceso
+                            console.error('Error:', error);
+                        });
+                } else {
+                    // Si el trabajo ha fallado, mostrar mensaje de error
+                    Swal.fire({
+                        title: 'Error al traducir el archivo',
+                        text: 'Ha ocurrido un error al traducir el archivo.',
+                        icon: 'error',
+                    });
+                }
+            })
+            .catch(error => {
+                console.error('Error al obtener el estado del trabajo:', error);
+                // Ocultar spinner y mostrar mensaje de error
+                Swal.fire({
+                    title: 'Error al traducir el archivo',
+                    text: 'Ha ocurrido un error al traducir el archivo.',
+                    icon: 'error',
+                });
+            });
+    }
+
+    // funcion para mostrar el modelo en viewer
+    function mostrarModelo(urn) {
+        //mostrar el modelo en el viewer
+        //var urn = localStorage.getItem('urn');
+
+        return new Promise(function (resolve, reject) {
+            // Lógica para lanzar el visor aquí
+            launchViewer(urn);
+            //launchViewer('dXJuOmFkc2sub2JqZWN0czpvcy5vYmplY3Q6dGVzdDJfY2hpbGVfYW50b2ZhZ2FzdGEvMDMtQ1I0MzIwLUJJTS1NT0QtVE9SUkUuQ0FQVEFDSU9OLjQuaWZj');
+            // Supongamos que después de lanzar el visor llamamos a resolve para indicar que el proceso ha terminado
+            resolve();
+        });
+
+    }
+
+    //traer todos los parámetros de get http://localhost:3500/getParametros
+    function getParametros() {
+        $.ajax({
+            url: 'http://localhost:3500/getParametros',
+            type: "GET",
+            success: function (data) {
+                //console.log(data);
+                //almacenar los valores de familia en un json localsotrage
+                localStorage.setItem('familias', JSON.stringify(data));
+
+            }
+        })
+    }
+
+    //prueba*********************************************************
+   function CrearParametros(){
+        const token = localStorage.getItem('token');
+        const urn = localStorage.getItem('urn');
+
+        const apiUrl = `https://developer.api.autodesk.com/modelderivative/v2/designdata/${urn}/metadata`;
+        fetch(apiUrl, {
+            method: 'GET',
+            headers: {
+                'Authorization': token,
+            },
+        })
+            .then(response => response.json())
+            .then(data => {
+                // Recorremos el array de metadatos
+                $.each(data.data.metadata, function (index, item) {
+                    // Verificamos si el objeto tiene la clave "guid"
+                    if ("guid" in item) {
+                        var guidValue = item.guid;
+                        console.log('Recuperar una lista de elementos visibles: ' + guidValue);
+                        localStorage.setItem("guid", guidValue);
+                        // Aquí puedes usar guidValue como necesites
+                    }
+                });
+            })
+            .catch(error => {
+                console.error('Error al obtener elementos visibles:', error);
+                // Ocultar spinner y mostrar mensaje de error
+                Swal.fire({
+                    title: 'Error al obtener elementos visibles',
+                    text: 'Ha ocurrido un error al obtener elementos visibles.',
+                    icon: 'error',
+                });
+            }
+            );
+        //*****************************************************************
+        //Recuperar propiedades de objetos en un Visor
+        const guid = localStorage.getItem('guid');
+        console.log('1111: ' + urn); //guid
+        const apiUrlProp = `https://developer.api.autodesk.com/modelderivative/v2/designdata/${urn}/metadata/${guid}/properties`;
+        fetch(apiUrlProp, {
+            method: 'GET',
+            headers: {
+                'Authorization': token,
+            },
+        })
+            .then(response => response.json())
+            .then(data => {
+                //console.log('total json: ' + data);
+                var uniqueProperties = {};
+                // Recorremos el JSON original
+                $.each(data.data.collection, function (index, item) {
+                    $.each(item.properties, function (key, value) {
+                        // Verificamos si la propiedad ya existe en uniqueProperties
+                        if (!(key in uniqueProperties)) {
+                            uniqueProperties[key] = {};
+                        }
+                        // Iteramos sobre los subvalores de la propiedad
+                        $.each(value, function (subKey, subValue) {
+                            if (!(subKey in uniqueProperties[key])) {
+                                uniqueProperties[key][subKey] = [];
+                            }
+                            // Agregamos el subvalor solo si no existe en el array
+                            if ($.inArray(subValue, uniqueProperties[key][subKey]) === -1) {
+                                uniqueProperties[key][subKey].push(subValue);
+                            }
+                        });
+                    });
+                });
+
+                // Mostramos el resultado en la consola
+                //console.log(JSON.stringify(uniqueProperties));
+                localStorage.setItem("dataprop", JSON.stringify(uniqueProperties));
+
+                // Obtener los títulos de cada grupo en el JSON
+                var titles = Object.keys(uniqueProperties);
+
+                // Recorrer los títulos y mostrarlos
+                $.each(titles, function (index, title) {
+                    //console.log("Título del grupo:", title);
+                    $("#grupo").append('<option value="' + title + '">' + title + '</option>');
+                });
+            })
+            .catch(error => {
+                console.error('Error al obtener propiedades de objetos:', error);
+                // Ocultar spinner y mostrar mensaje de error
+                Swal.fire({
+                    title: 'Error al obtener propiedades de objetos',
+                    text: 'Ha ocurrido un error al obtener propiedades de objetos.',
+                    icon: 'error',
+                });
+            }
+            );
+
+   }
+
+    // Escuchar el evento change en el select grupo
+    $("#grupo").on("change", function () {
+        
+        var selectedValue = $(this).val();
+        //console.log("Opción seleccionada:", selectedValue);
+        //console.log("dataprop", localStorage.getItem('dataprop'));
+
+        // Aquí puedes realizar acciones basadas en la opción seleccionada
+        var data = JSON.parse(localStorage.getItem('dataprop')); //JSON.parse(json);
+
+        // Nombre del grupo a recorrer
+        //var groupName = "Constraints";
+
+        $('#parambim').empty();
+        $("#parambim").append('<option value="0">Selecciona una opción</option>');
+        // Recorrer las claves del grupo seleccionado
+        Object.keys(data[selectedValue]).forEach(function (key) {
+            //console.log("parámetros: " + key);
+            $("#parambim").append('<option value="' + key + '">' + key + '</option>');
+        });
+    });
+
+    // Escuchar el evento change en el select parámetro
+    $("#parambim").on("change", function () {
+        debugger
+        var selectedGrupo = $('#grupo').val();
+        var selectedValue = $(this).val();
+        var data = JSON.parse(localStorage.getItem('dataprop')); //JSON.parse(json);
+
+        //console.log("Opción seleccionada:", selectedValue);
+        //console.log("dataprop", data);
+
+        // Obtener los valores de Level del JSON
+        var valoresSelec = data[selectedGrupo][selectedValue];
+        $("#valoresunicos").empty();
+        // Recorrer los valores y hacer algo con cada uno
+        valoresSelec.forEach(function (valor) {
+            // Hacer algo con cada valor, por ejemplo, imprimirlo en la consola
+            //console.log(valor);
+            //$("#valoresunicos").append(valor + '<br>');
+
+            var $textbox = $('<input>', {
+                type: 'text',
+                value: valor, //offset,
+                id: 'textbox-', //+ index,
+                disabled: true // Deshabilitado por defecto
+            });
+
+            var $checkbox = $('<input>', {
+                type: 'checkbox',
+                id: 'checkbox-' //+ index
+            });
+
+            var $label = $('<label>', {
+                for: 'checkbox-', //+ index,
+                text: ' Habilitar edición'
+            });
+
+            $checkbox.change(function () {
+                toggleTextbox(this, $textbox);
+            });
+
+            $("#valoresunicos").append($textbox);
+            $("#valoresunicos").append($checkbox);
+            $("#valoresunicos").append($label);
+            $("#valoresunicos").append('<br>');
+        });
+    });
+
+    // Función para habilitar/deshabilitar el textbox
+    function toggleTextbox(checkbox, textbox) {
+        textbox.prop('disabled', !$(checkbox).is(':checked'));
+    }
+
+    function CargarDatos() {
+        var urn = '@(vl_Modelo.urn)';
+        localStorage.setItem('urn',urn);
+        obtenerParametros();
+        CrearParametros();
+        ListarParametrosPorModelo();
+    }
+
+    function ListarParametrosPorModelo() {
+        const idModelo = '@(vl_Modelo.idModelo)';
+        fetch(`@Url.Action("GetParametrosPorModelo", "Modelos")?idModelo=${idModelo}`)
+            .then(response => response.json())
+            .then(data => {
+                console.dir('listando parametros ...');
+                console.dir(data);
+
+                const result = [];
+
+                data.forEach(item => {
+                    // Buscar si el id_parametro_cosapi ya existe en el result
+                    let existingItem = result.find(x => x.id === item.id_parametro_cosapi);
+
+                    if (!existingItem) {
+                        // Si no existe, crear un nuevo objeto
+                        existingItem = {
+                            id: item.id_parametro_cosapi,
+                            descripcion: item.parametro_descripcion,
+                            grupos: []
+                        };
+                        result.push(existingItem);
+                    }
+
+                    // Buscar si el grupo ya existe en los grupos del item actual
+                    let existingGroup = existingItem.grupos.find(g => g.nombre === item.grupo);
+
+                    if (!existingGroup) {
+                        // Si no existe, crear un nuevo grupo
+                        existingGroup = {
+                            nombre: item.grupo,
+                            parametros: []
+                        };
+                        existingItem.grupos.push(existingGroup);
+                    }
+
+                    // Verificar si el parámetro con el mismo nombre y valor ya existe
+                    let existingParam = existingGroup.parametros.find(p => p.nombre_param === item.parametro && p.valor === item.valor);
+
+                    if (!existingParam) {
+                        // Si no existe, agregarlo
+                        existingGroup.parametros.push({
+                            nombre_param: item.parametro,
+                            valor: item.valor
+                        });
+                    }
+                });
+
+                console.log('Resultado sin duplicados:');
+                console.log(result);
+
+                PintarParametrosModelo(result);
+            })
+            .catch(error => console.error('Error:', error));
+    }
+
+    function PintarParametrosModelo(result) {
+        const resultadoDiv = document.getElementById('resultado');
+        resultadoDiv.innerHTML = '';
+
+        result.forEach((item, index) => {
+            let gruposHTML = item.grupos.map(grupo => {
+                let parametrosHTML = grupo.parametros.map(param => `(${param.nombre_param}: ${param.valor})`).join(' ');
+                return `[${grupo.nombre}: ${parametrosHTML}]`;
+            }).join(' ');
+
+            const p = document.createElement('p');
+            p.textContent = `${index + 1}. ${item.descripcion} : ${gruposHTML}`;
+            resultadoDiv.appendChild(p);
+        });
+    }
+
+    function obtenerParametros() {
+        // usar https://developer.api.autodesk.com/modelderivative/v2/designdata/job para la traducción
+        const token = localStorage.getItem('token');
+        const urn = localStorage.getItem('urn');
+        console.log('localStorage urn: ' + urn);
+        console.log('localStorage token: ' + token);
+        //console.log(urn);
+        const apiUrl = 'https://developer.api.autodesk.com/modelderivative/v2/designdata/job';
+        const job = {
+            input: {
+                urn: urn,
+            },
+            output: {
+                formats: [
+                    {
+                        type: 'svf',
+                        views: ['2d', '3d'],
+                    },
+                ],
+            },
+        };
+        fetch(apiUrl, {
+            method: 'POST',
+            headers: {
+                'Authorization': token,
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(job),
+        })
+            .then(response => response.json())
+            .then(data => {
+                console.dir('Obteniendo trabajo');
+                obtenerEstadoTrabajo();
+
+            })
+            .catch(error => {
+                console.error('Error al traducir el archivo:', error);
+                // Ocultar spinner y mostrar mensaje de error
+                Swal.fire({
+                    title: 'Error al traducir el archivo',
+                    text: 'Ha ocurrido un error al traducir el archivo.',
+                    icon: 'error',
+                });
+            }
+            );
+
+    }
+
+    var matrizGlobal = [];
+    // Evento click para el botón de guardar
+    $("#registrar").click(function (event) {
+        event.preventDefault();
+
+        var editedValues = [];
+
+        // Recorrer todos los textboxes para encontrar los que están habilitados y editados
+        $("#valoresunicos input[type='text']").each(function () {
+            if (!$(this).prop('disabled')) {
+                var value = $(this).val();
+
+                // Comprobar si el valor ya está en la matriz global
+                var isDuplicate = matrizGlobal.some(function (row) {
+                    return row.valor === value;
+                });
+
+                if (!isDuplicate) {
+                    var filaMatrizGlobal = {}; // Crear una nueva instancia para cada fila
+
+                    filaMatrizGlobal['parametro_cosapi'] = $('#parametrocosapi').val();
+                    filaMatrizGlobal['grupo'] = $('#grupo').val();
+                    filaMatrizGlobal['parametro'] = $('#parambim').val();
+                    filaMatrizGlobal['valor'] = value;
+
+                    editedValues.push(filaMatrizGlobal); // Agregar la nueva fila a editedValues
+                }
+            }
+        });
+
+        // Agregar los valores no duplicados a la matriz global
+        matrizGlobal = matrizGlobal.concat(editedValues);
+
+        // Mostrar los valores editados (puedes guardarlos en localStorage o enviarlos al servidor)
+        console.log("Valores global:", matrizGlobal);
+
+        alert(JSON.stringify(matrizGlobal)); // Mostrar los valores globales en una alerta
+    });
+
+    $("#grabar").click(function (event) {
+        event.preventDefault();
+
+        var modelosRequest = @(Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(new ModelosRequest())));
+
+        modelosRequest.idProyectos = @vl_Modelo.idProyectos;
+        modelosRequest.modelo = localStorage.getItem('modelname');
+        modelosRequest.disciplina = $('#disciplina').val();
+        modelosRequest.estatus = "";
+        modelosRequest.urn = localStorage.getItem('urn');
+        modelosRequest.Parametros = matrizGlobal;
+
+        // Realiza una solicitud fetch al endpoint '/Modelos/InsertarModelo'
+        fetch('@Url.Action("InsertarModelo", "Modelos")', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(modelosRequest)
+        })
+            .then(response => response.json())
+            .then(data => {
+                if (data.content == 1) {
+                    swal('Éxito', "Accesos actualizados.", "success");
+                } else {
+                    swal('Error', 'Comuniquese con el área informáica: ' + data, 'error');
+                }
+            });
+    });
+
+    document.addEventListener('DOMContentLoaded', function () {
+        CargarDatos();
+    });
+    
+</script>

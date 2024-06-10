@@ -43,4 +43,5 @@ namespace Api.Dto
         public int idRol { get; set; }
         public string correoElectronico { get; set; }
     }
+
 }

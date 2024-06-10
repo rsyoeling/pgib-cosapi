@@ -141,17 +141,14 @@ namespace Api.Repository.Impl
                 var data = new Dictionary<string, object>
                 {
                     { "status", estatus }
-                    // Agrega más columnas y valores según sea necesario
                 };
                 var condition = " idUsuario=" + idUsuario;
 
-                // Llamar al método UpdateData para actualizar los datos en la tabla
                 int filasActualizadas = this.databaseManager.LookupDatabaseConnectorById(ApiConstants.osilDatabaseId).UpdateData(tableName, data, condition);
 
                 result.code = 200000;
                 result.message = "success";
                 result.content = filasActualizadas;
-
             }
             catch (Exception e)
             {

@@ -1,4 +1,7 @@
-﻿using RestSharp;
+﻿using COSAPI.NETC.PGIB.Entities;
+using COSAPI.NETC.PGIB.Utils;
+using Newtonsoft.Json;
+using RestSharp;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,6 +21,28 @@ namespace COSAPI.NETC.PGIB.Models
         public string fechaCreacion { get; set; }
         public List<Parametros> Parametros { get; set; }
     }
+
+    public class ObjectResultModelo
+    {
+        public int code { get; set; }
+        public string message { get; set; }
+        public object content { get; set; }
+    }
+
+    public class ModeloResponse
+    {
+        public int idModelo { get; set; }
+        public int idProyectos { get; set; }
+        public string modelo { get; set; }
+        public string urn { get; set; }
+        public int modeloVersion { get; set; }
+        public string disciplina { get; set; }
+        public string usuarioCreacion { get; set; }
+        public string fechaCreacion { get; set; }
+
+        public List<Parametros> Parametros { get; set; }
+    }
+
     public class Parametros
     {
         public string parametro_cosapi { get; set; }
@@ -86,8 +111,7 @@ namespace COSAPI.NETC.PGIB.Models
             string respuesta = "";
             try
             {
-                //http://localhost:59400
-                var options = new RestClientOptions("http://10.100.94.14/Rest.Pgib")
+                var options = new RestClientOptions(ConstantesApp.UrlBase)
                 {
                     MaxTimeout = -1,
                 };
@@ -124,6 +148,80 @@ namespace COSAPI.NETC.PGIB.Models
                 respuesta = ex.Message;
             }
             return respuesta;
+        }
+
+        public static List<ModeloResponse> ListarModelosPorProyecto(int idProyecto)
+        {
+            List<ModeloResponse> lista = new List<ModeloResponse>();
+            string respuesta = "";
+
+            try
+            {
+                var options = new RestClientOptions(ConstantesApp.UrlBase)
+                {
+                    MaxTimeout = -1,
+                };
+                var client = new RestClient(options);
+                var request = new RestRequest("/v1/modelos/listarModeloPorProyecto?idProyecto=" + idProyecto, Method.Get);
+                RestResponse response = client.Execute(request);
+                respuesta = response.Content;
+
+                lista = (List<ModeloResponse>)JsonConvert.DeserializeObject<List<ModeloResponse>>(respuesta);
+            }
+            catch (Exception ex)
+            {
+            }
+            return lista;
+        }
+
+        public static ModeloResponse Buscar_ModeloPorId(int idModelo)
+        {
+            ModeloResponse obj = null;
+            string respuesta = "";
+
+            try
+            {
+                var options = new RestClientOptions(ConstantesApp.UrlBase)
+                {
+                    MaxTimeout = -1,
+                };
+                var client = new RestClient(options);
+                var request = new RestRequest("/v1/modelos/buscarModeloPorId?idModelo=" + idModelo, Method.Get);
+                RestResponse response = client.Execute(request);
+                respuesta = response.Content;
+
+                obj = (ModeloResponse)JsonConvert.DeserializeObject<ModeloResponse>(respuesta);
+            }
+            catch (Exception ex)
+            {
+            }
+            return obj;
+        }
+
+        public static ObjectResultEntity Eliminar_Modelo(int idModelo)
+        {
+            ObjectResultEntity result = new ObjectResultEntity();
+            string respuesta = "";
+            try
+            {
+                var options = new RestClientOptions(ConstantesApp.UrlBase)
+                {
+                    MaxTimeout = -1,
+                };
+                var client = new RestClient(options);
+                var request = new RestRequest($"/v1/modelos/eliminarModelo?idModelo={idModelo}", Method.Delete);
+                request.AddHeader("Content-Type", "application/json");
+                RestResponse response = client.Execute(request);
+                respuesta = response.Content;
+
+                result = JsonConvert.DeserializeObject<ObjectResultEntity>(respuesta);
+            }
+            catch (Exception ex)
+            {
+                respuesta = ex.Message;
+                result.message = respuesta;
+            }
+            return result;
         }
 
     }

@@ -1,4 +1,9 @@
-﻿<!-- añadir viewer forge autodesk -->
+﻿@{
+    List<ParametroCosapi> vl_ListParametrosCosapi = ViewBag.ListParametrosCosapi;
+}
+
+
+<!-- añadir viewer forge autodesk -->
 <link rel="stylesheet" href="https://developer.api.autodesk.com/modelderivative/v2/viewers/7.*/style.min.css" type="text/css">
 <script src="https://developer.api.autodesk.com/modelderivative/v2/viewers/7.*/viewer3D.min.js"></script>
 
@@ -73,85 +78,10 @@
                         <label for="archivo">Parámetro Cosapi</label>
                         <select id="parametrocosapi" class="form-control">
                             <option value="0">Seleccione un parámetro</option>
-                            <option value="1">ACTIVIDAD_CRONOGRAMA</option>
-                            <option value="2">ALTURA</option>
-                            <option value="3">AMBIENTE</option>
-                            <option value="4">AREA</option>
-                            <option value="5">AVANCE</option>
-                            <option value="6">CAMPO_FRENTE</option>
-                            <option value="7">CANTIDAD</option>
-                            <option value="8">CODIGO_OBRA</option>
-                            <option value="9">COD_AMBIENTE</option>
-                            <option value="10">COD_CONSULTA</option>
-                            <option value="11">COD_INTERFERENCIA</option>
-                            <option value="12">COD_TIPICO_ELEMENTO</option>
-                            <option value="13">COTA_INFERIOR</option>
-                            <option value="14">COTA_SUPERIOR</option>
-                            <option value="15">CUADRILLA</option>
-                            <option value="16">DESCRIPCION_AREA</option>
-                            <option value="17">DESCRIPCION_ELEMENTO</option>
-                            <option value="18">DESCRIPCION_ELEMENTO_PRINCIPAL</option>
-                            <option value="19">DESCRIPCION_FRENTE</option>
-                            <option value="20">DESCRIPCION_LOTE</option>
-                            <option value="21">DESCRIPCION_PARTIDA</option>
-                            <option value="22">DESCRIPCION_SECTOR</option>
-                            <option value="23">DESCRIPCION_SUBLOTE</option>
-                            <option value="24">DESCRIPCION_WBS_NIVEL_1</option>
-                            <option value="25">DESCRIPCION_WBS_NIVEL_2</option>
-                            <option value="26">DESCRIPCION_WBS_NIVEL_3</option>
-                            <option value="27">DESCRIPCION_WBS_NIVEL_4</option>
-                            <option value="28">DESCRIPCION_WBS_NIVEL_5</option>
-                            <option value="29">DIM_A</option>
-                            <option value="30">DIM_B</option>
-                            <option value="31">DIM_C</option>
-                            <option value="32">EJECUTADO</option>
-                            <option value="33">EJE_H</option>
-                            <option value="34">EJE_V</option>
-                            <option value="35">ESPECIFICACION_TECNICA</option>
-                            <option value="36">ESTADO_AVANCE</option>
-                            <option value="37">ESTATUS_MODELADO</option>
-                            <option value="38">EST_DIMENSION</option>
-                            <option value="39">EST_MODELADO</option>
-                            <option value="40">EST_TIPO</option>
-                            <option value="41">EST_UBICACION</option>
-                            <option value="42">EXPORTAR</option>
-                            <option value="43">FACTOR</option>
-                            <option value="44">FASE</option>
-                            <option value="45">FASEO</option>
-                            <option value="46">FECHA_EJECUTADA</option>
-                            <option value="47">FECHA_PLANIFICADA</option>
-                            <option value="48">HOST</option>
-                            <option value="49">H_V</option>
-                            <option value="50">ID_CRONOGRAMA</option>
-                            <option value="51">ID_ELEMENTO</option>
-                            <option value="52">ID_EXTERNAL</option>
-                            <option value="53">ID_PARTIDA</option>
-                            <option value="54">INSTALACION</option>
-                            <option value="55">IRREGULAR</option>
-                            <option value="56">LOTE</option>
-                            <option value="57">MARCA_ELEMENTO</option>
-                            <option value="58">MARCA_ELEMENTO_PRINCIPAL</option>
-                            <option value="59">MOD_INSTALACION</option>
-                            <option value="60">MONTO_FINAL</option>
-                            <option value="61">NIVEL</option>
-                            <option value="62">PLANO_CONSTRUCCION</option>
-                            <option value="63">PLANO_DETALLE</option>
-                            <option value="64">PU</option>
-                            <option value="65">RESPONSABLE</option>
-                            <option value="66">REV_PLANO_CONSTRUCCION</option>
-                            <option value="67">REV_PLANO_DETALLE</option>
-                            <option value="68">RUBRO</option>
-                            <option value="69">SECTOR</option>
-                            <option value="70">SECUENCIA</option>
-                            <option value="71">SISTEMA</option>
-                            <option value="72">SUBLOTE</option>
-                            <option value="73">UBICACION</option>
-                            <option value="74">UNIDAD</option>
-                            <option value="75">WBS_NIVEL_1</option>
-                            <option value="76">WBS_NIVEL_2</option>
-                            <option value="77">WBS_NIVEL_3</option>
-                            <option value="78">WBS_NIVEL_4</option>
-                            <option value="79">WBS_NIVEL_5</option>
+                            @foreach (var parametro in vl_ListParametrosCosapi)
+                            {
+                                <option value="@parametro.idParametroCosapi">@parametro.descripcion</option>
+                            }
                         </select>
                     </form>
                     <!-- Las preguntas se agregarán aquí -->
@@ -453,7 +383,7 @@
                 if (status === 'inprogress') {
                     setTimeout(() => {
                         obtenerEstadoTrabajo();
-                    }, 5000);
+                    }, 2000);
                     Swal.fire({
                         title: 'Traduciendo archivo',
                         allowOutsideClick: false,
