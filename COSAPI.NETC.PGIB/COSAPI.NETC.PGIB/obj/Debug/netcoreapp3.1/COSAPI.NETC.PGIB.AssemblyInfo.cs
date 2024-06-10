@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("COSAPI.NETC.PGIB")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+2ef1c79cde08401409b952a04dc0eea124d81dbd")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+3e6c73eae735cc060aa0010c48a552f842b2b17b")]
 [assembly: System.Reflection.AssemblyProductAttribute("COSAPI.NETC.PGIB")]
 [assembly: System.Reflection.AssemblyTitleAttribute("COSAPI.NETC.PGIB")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
