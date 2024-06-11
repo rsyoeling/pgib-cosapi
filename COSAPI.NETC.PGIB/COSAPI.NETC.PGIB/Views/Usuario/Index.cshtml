@@ -1,7 +1,7 @@
 ﻿@{
     ResponseUsuario vl_Usuario = ViewBag.ListarUsuario;
 }
-<div class="card-body" style="padding: 0px; height: 100vh">
+<div class="card-body" style="padding: 0px;">
     <!-- viewer html col-4-->
     <div class="container mt-5">
         <h1 style="margin-bottom:-0.5em;">Mantenimiento de Usuarios</h1>
@@ -12,9 +12,9 @@
             <img src="~/global_assets/images/img_avatar.png" alt="Avatar" style="width:200px">
             <!-- <button class="btn btn-success btn-add" onclick="addUser()">Añadir Usuario</button> -->
         </div>
-        <div class="card-body " style="padding: 0px; height: 100vh">
+        <div class="card-body " style="padding: 0px;">
             <!-- viewer html -->
-            <div class="container mt-5">
+            <div class="container mt-5 table-responsive">
                 <button id="addUserBtn" class="btn btn-primary mb-3" data-toggle="modal" data-target="#addUserModal" onclick="activarNuevo()">Añadir Usuario</button>
                 <table class="table table-bordered table-hover" id="tbMantUsuario">
                     <thead>

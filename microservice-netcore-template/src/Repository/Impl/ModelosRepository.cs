@@ -114,6 +114,132 @@ namespace Api.Repository.Impl
             return result;
         }
 
+        public ObjectResult Actualizar_Modelos(ModelosRequest modelosRequest)
+        {
+            ObjectResult result = new ObjectResult();
+            try
+            {
+                int IdInsertada = 0;
+                int idParametrizado = 0;
+                var tableName = "Modelos";
+
+                var dataParam = new Dictionary<string, object>
+                    {
+                        { "disciplina",  modelosRequest.disciplina },
+                        { "usuarioModificacion", modelosRequest.usuarioModificacion },
+                        { "fechaModificacion", modelosRequest.fechaModificacion  }
+                    };
+
+                var condition = " idModelo=" + modelosRequest.idModelo;
+                IdInsertada = this.databaseManager.LookupDatabaseConnectorById(ApiConstants.osilDatabaseId).UpdateData(tableName, dataParam, condition);
+
+                if (IdInsertada > 0)
+                {
+                    foreach (var item in modelosRequest.Parametros)
+                    {
+                        var parameters = new DynamicParameters();
+                        parameters.Add("IdProyecto", modelosRequest.idProyectos);
+                        parameters.Add("IdModelo", modelosRequest.idModelo);
+                        parameters.Add("IdParametroCosapi", item.parametro_cosapi);
+                        parameters.Add("NombreGrupo", item.grupo);
+                        parameters.Add("NombreParametro", item.parametro);
+
+                        string query = @"
+                            SELECT idParametros , valor
+                            FROM Parametros
+                            WHERE idProyectos = @IdProyecto AND idModelo = @IdModelo  
+                            AND parametro_cosapi = @IdParametroCosapi
+                            AND grupo = @NombreGrupo
+                            AND parametro = @NombreParametro AND estado = 1";
+
+                        List<Parametros> listaParametro = this.databaseManager.LookupDatabaseConnectorById(ApiConstants.osilDatabaseId).
+                           Query<Parametros>(query, parameters);
+
+                        tableName = "Parametros";
+
+                        if (listaParametro.Count() > 0) // Existe Parametro
+                        {
+                            Parametros objParametro = listaParametro[0];
+
+                            // Se evalua si el parametro es igual
+                            if (objParametro.valor.Trim().Equals(item.valor.Trim()))
+                            {
+                                dataParam = new Dictionary<string, object>
+                                {
+                                    { "usuarioModificacion", modelosRequest.usuarioModificacion },
+                                    { "fechaModificacion", modelosRequest.fechaModificacion  }
+                                };
+
+                                condition = " idParametros=" + objParametro.idParametros;
+
+                                idParametrizado = this.databaseManager.LookupDatabaseConnectorById(ApiConstants.osilDatabaseId).UpdateData(tableName, dataParam, condition);
+
+                            }
+                            else
+                            {
+                                // Actualizar Parametro a Inactivo
+                                dataParam = new Dictionary<string, object>
+                                {
+                                    { "estado",  0 },
+                                    { "usuarioModificacion", modelosRequest.usuarioModificacion },
+                                    { "fechaModificacion", modelosRequest.fechaModificacion  }
+                                };
+
+                                condition = " idParametros=" + objParametro.idParametros;
+
+                                IdInsertada = this.databaseManager.LookupDatabaseConnectorById(ApiConstants.osilDatabaseId).UpdateData(tableName, dataParam, condition);
+
+                                // Registrar Nuevo Parametro
+
+                                if (IdInsertada > 0)
+                                {
+                                    dataParam = new Dictionary<string, object>
+                                {
+                                    { "idProyectos", modelosRequest.idProyectos },
+                                    { "idModelo", modelosRequest.idModelo },
+                                    { "parametro_cosapi", "'" + item.parametro_cosapi + "'"},
+                                    { "grupo", "'" + item.grupo + "'"},
+                                    { "parametro", "'" + item.parametro + "'"},
+                                    { "valor", "'" + item.valor + "'"},
+                                    { "estado", "'1'" },
+                                    { "usuarioCreacion", modelosRequest.usuarioModificacion },
+                                    { "fechaCreacion",  "'" + modelosRequest.fechaModificacion + "'"  }
+                                };
+                                    idParametrizado = this.databaseManager.LookupDatabaseConnectorById(ApiConstants.osilDatabaseId).InsertData(tableName, dataParam);
+                                }
+                            } 
+                        }
+                        else
+                        {
+                                dataParam = new Dictionary<string, object>
+                                {
+                                    { "idProyectos", modelosRequest.idProyectos },
+                                    { "idModelo", modelosRequest.idModelo },
+                                    { "parametro_cosapi", "'" + item.parametro_cosapi + "'"},
+                                    { "grupo", "'" + item.grupo + "'"},
+                                    { "parametro", "'" + item.parametro + "'"},
+                                    { "valor", "'" + item.valor + "'"},
+                                    { "estado", "'1'" },
+                                    { "usuarioCreacion", modelosRequest.usuarioModificacion },
+                                    { "fechaCreacion",  "'" + modelosRequest.fechaModificacion + "'"  }
+                                };
+                                idParametrizado = this.databaseManager.LookupDatabaseConnectorById(ApiConstants.osilDatabaseId).InsertData(tableName, dataParam);
+                        }
+                    }
+                }
+
+                result.code = 200000;
+                result.message = "success";
+                result.content = idParametrizado;
+
+            }
+            catch (Exception e)
+            {
+                throw new Exception("Failed to fetch Actualizar_Modelos.", e);
+            }
+            return result;
+        }
+
         public List<ModeloResponse> Listar_ModeloPorProyecto(int idProyecto)
         {
             List<ModeloResponse> lista = new List<ModeloResponse> ();   
@@ -207,7 +333,5 @@ namespace Api.Repository.Impl
             }
             return result;
         }
-
-
     }
 }

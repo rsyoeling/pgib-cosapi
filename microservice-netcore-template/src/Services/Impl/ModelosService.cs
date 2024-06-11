@@ -36,6 +36,18 @@ namespace Api.Services.Impl
             }
         }
 
+        public ObjectResult Actualizar_Modelos(ModelosRequest modelosRequest)
+        {
+            try
+            {
+                return this.ModelosRepository.Actualizar_Modelos(modelosRequest);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Failed to fetch Actualizar_Modelos.", ex);
+            }
+        }
+
         public ObjectResult EliminarModelo(int idModelo)
         {
             try

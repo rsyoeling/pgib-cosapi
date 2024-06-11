@@ -381,9 +381,7 @@
                 // Obtener el estado del trabajo
                 const status = data.status;
                 if (status === 'inprogress') {
-                    setTimeout(() => {
-                        obtenerEstadoTrabajo();
-                    }, 2000);
+                    obtenerEstadoTrabajo();
                     Swal.fire({
                         title: 'Traduciendo archivo',
                         allowOutsideClick: false,
@@ -674,6 +672,7 @@
         event.preventDefault();
 
         var editedValues = [];
+        var seleccion = 0;
 
         // Recorrer todos los textboxes para encontrar los que están habilitados y editados
         $("#valoresunicos input[type='text']").each(function () {
@@ -694,6 +693,8 @@
                     filaMatrizGlobal['valor'] = value;
 
                     editedValues.push(filaMatrizGlobal); // Agregar la nueva fila a editedValues
+
+                    seleccion++;
                 }
             }
         });
@@ -702,13 +703,22 @@
         matrizGlobal = matrizGlobal.concat(editedValues);
 
         // Mostrar los valores editados (puedes guardarlos en localStorage o enviarlos al servidor)
-        console.log("Valores global:", matrizGlobal);
+        console.log("Valores global:", matrizGlobal); // Mostrar los valores globales en una alerta
 
-        alert(JSON.stringify(matrizGlobal)); // Mostrar los valores globales en una alerta
+        if(seleccion > 0){
+            swal('Éxito', "Asignación correcta.", "success");
+        }
+        
     });
 
     $("#grabar").click(function (event) {
         event.preventDefault();
+
+
+        if (matrizGlobal.length == 0) {
+            swal('Advertencia', "Debe ingresar parametros a asignar.", "error");
+            return;
+        }
 
         var modelosRequest = @(Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(new ModelosRequest())));
 
@@ -730,9 +740,11 @@
             .then(response => response.json())
             .then(data => {
                 if (data.content == 1) {
-                    swal('Éxito', "Accesos actualizados.", "success");
+                    swal('Éxito', "Accesos actualizados.", "success").then(function () {
+                        window.location.href = "/modelos/Index/" + @(ViewBag.IdProyecto);
+                    });
                 } else {
-                    swal('Error', 'Comuniquese con el área informáica: ' + data, 'error');
+                    swal('Error', 'Comuniquese con el área informáica.', 'error');
                 }
             });
     });

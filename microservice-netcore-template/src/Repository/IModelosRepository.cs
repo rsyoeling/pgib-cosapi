@@ -10,6 +10,7 @@ namespace Api.Repository
     public interface IModelosRepository
     {
         ObjectResult Insertar_Modelos(ModelosRequest modelosRequest);
+        ObjectResult Actualizar_Modelos(ModelosRequest modelosRequest);
 
         List<ModeloResponse> Listar_ModeloPorProyecto(int idProyecto);
 

@@ -344,6 +344,9 @@
                 //console.log('total json: ' + data);
                 var uniqueProperties = {};
                 // Recorremos el JSON original
+                console.dir('data.data.collection');
+                console.dir(data.data.collection);
+                console.dir('=======================');
                 $.each(data.data.collection, function (index, item) {
                     $.each(item.properties, function (key, value) {
                         // Verificamos si la propiedad ya existe en uniqueProperties
@@ -404,6 +407,7 @@
 
         $('#parambim').empty();
         $("#parambim").append('<option value="0">Selecciona una opción</option>');
+        $("#valoresunicos").empty();
         // Recorrer las claves del grupo seleccionado
         Object.keys(data[selectedValue]).forEach(function (key) {
             //console.log("parámetros: " + key);
@@ -413,7 +417,7 @@
 
     // Escuchar el evento change en el select parámetro
     $("#parambim").on("change", function () {
-        debugger
+     
         var selectedGrupo = $('#grupo').val();
         var selectedValue = $(this).val();
         var data = JSON.parse(localStorage.getItem('dataprop')); //JSON.parse(json);
@@ -423,6 +427,10 @@
 
         // Obtener los valores de Level del JSON
         var valoresSelec = data[selectedGrupo][selectedValue];
+        console.dir('INICIO VALORES SELECCION');
+        console.dir(data);
+        console.dir(valoresSelec);
+        console.dir('FIN VALORES SELECCION');
         $("#valoresunicos").empty();
         // Recorrer los valores y hacer algo con cada uno
         valoresSelec.forEach(function (valor) {
@@ -597,6 +605,7 @@
         event.preventDefault();
 
         var editedValues = [];
+        var seleccion = 0;
 
         // Recorrer todos los textboxes para encontrar los que están habilitados y editados
         $("#valoresunicos input[type='text']").each(function () {
@@ -617,6 +626,7 @@
                     filaMatrizGlobal['valor'] = value;
 
                     editedValues.push(filaMatrizGlobal); // Agregar la nueva fila a editedValues
+                    seleccion++;
                 }
             }
         });
@@ -627,23 +637,32 @@
         // Mostrar los valores editados (puedes guardarlos en localStorage o enviarlos al servidor)
         console.log("Valores global:", matrizGlobal);
 
-        alert(JSON.stringify(matrizGlobal)); // Mostrar los valores globales en una alerta
+       // alert(JSON.stringify(matrizGlobal)); // Mostrar los valores globales en una alerta
+
+        if (seleccion > 0) {
+            swal('Éxito', "Asignación correcta.", "success");
+        }
     });
 
     $("#grabar").click(function (event) {
         event.preventDefault();
 
+        if (matrizGlobal.length == 0) {
+            swal('Advertencia', "Debe ingresar parametros a asignar.", "error");
+            return;
+        }
+
         var modelosRequest = @(Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(new ModelosRequest())));
 
         modelosRequest.idProyectos = @vl_Modelo.idProyectos;
+        modelosRequest.idModelo = @vl_Modelo.idModelo;
         modelosRequest.modelo = localStorage.getItem('modelname');
         modelosRequest.disciplina = $('#disciplina').val();
         modelosRequest.estatus = "";
         modelosRequest.urn = localStorage.getItem('urn');
         modelosRequest.Parametros = matrizGlobal;
 
-        // Realiza una solicitud fetch al endpoint '/Modelos/InsertarModelo'
-        fetch('@Url.Action("InsertarModelo", "Modelos")', {
+        fetch('@Url.Action("ActualizarModelo", "Modelos")', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -652,10 +671,13 @@
         })
             .then(response => response.json())
             .then(data => {
+                console.dir('[resultado Actualizar]' , data);
                 if (data.content == 1) {
-                    swal('Éxito', "Accesos actualizados.", "success");
+                    swal('Éxito', "Accesos actualizados.", "success").then(function () {
+                        window.location.href = "/modelos/Index/" + @(vl_Modelo.idProyectos);
+                    });
                 } else {
-                    swal('Error', 'Comuniquese con el área informáica: ' + data, 'error');
+                    swal('Error', 'Comuniquese con el área informáica.', 'error');
                 }
             });
     });

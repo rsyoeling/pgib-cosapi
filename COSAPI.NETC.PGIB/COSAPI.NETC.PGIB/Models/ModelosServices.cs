@@ -13,12 +13,15 @@ namespace COSAPI.NETC.PGIB.Models
     public class ModelosRequest
     {
         public int idProyectos { get; set; }
+        public int idModelo { get; set; }
         public string modelo { get; set; }
         public string disciplina { get; set; }
         public string estatus { get; set; }
         public string urn { get; set; }
         public int usuarioCreacion { get; set; }
         public string fechaCreacion { get; set; }
+        public int usuarioModificacion { get; set; }
+        public string fechaModificacion { get; set; }
         public List<Parametros> Parametros { get; set; }
     }
 
@@ -150,6 +153,51 @@ namespace COSAPI.NETC.PGIB.Models
             return respuesta;
         }
 
+        public static string Actualizar_Modelo(ModelosRequest modelosRequest)
+        {
+            string respuesta = "";
+            try
+            {
+                var options = new RestClientOptions(ConstantesApp.UrlBase)
+                {
+                    MaxTimeout = -1,
+                };
+                var client = new RestClient(options);
+                var request = new RestRequest("/v1/modelos/actualizarmodelos", Method.Put);
+                request.AddHeader("Content-Type", "application/json");
+
+                var parametros = modelosRequest.Parametros.Select(item => new
+                {
+                    parametro_cosapi = item.parametro_cosapi,
+                    grupo = item.grupo,
+                    parametro = item.parametro,
+                    valor = item.valor
+                }).ToList();
+
+                var requestBody = new
+                {
+                    idModelo = modelosRequest.idModelo,
+                    idProyectos = modelosRequest.idProyectos,
+                    modelo = modelosRequest.modelo,
+                    disciplina = modelosRequest.disciplina,
+                    estatus = modelosRequest.estatus,
+                    urn = modelosRequest.urn,
+                    usuarioModificacion = modelosRequest.usuarioModificacion,
+                    fechaModificacion = modelosRequest.fechaModificacion,
+                    Parametros = parametros
+                };
+
+                request.AddJsonBody(requestBody);
+                var response = client.Execute(request);
+                respuesta = response.Content;
+            }
+            catch (Exception ex)
+            {
+                respuesta = ex.Message;
+            }
+            return respuesta;
+        }
+        
         public static List<ModeloResponse> ListarModelosPorProyecto(int idProyecto)
         {
             List<ModeloResponse> lista = new List<ModeloResponse>();

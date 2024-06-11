@@ -94,5 +94,15 @@ namespace COSAPI.NETC.PGIB.Controllers
             var resultado = ModelosServices.Insertar_Modelo(modelosRequest);
             return Ok(resultado);
         }
+
+        [HttpPost]
+        public IActionResult ActualizarModelo([FromBody] ModelosRequest modelosRequest)
+        {
+            DateTime fechaActual = DateTime.Now;
+            modelosRequest.usuarioModificacion = idUsuario;
+            modelosRequest.fechaModificacion = fechaActual.ToString("yyyy-MM-dd HH:mm");
+            var resultado = ModelosServices.Actualizar_Modelo(modelosRequest);
+            return Ok(resultado);
+        }
     }
 }

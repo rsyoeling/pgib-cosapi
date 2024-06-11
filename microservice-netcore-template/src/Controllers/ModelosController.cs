@@ -36,6 +36,15 @@ namespace Api.Controllers
             return Ok(vins);
         }
 
+        [HttpPut]
+        [Route("/v1/modelos/actualizarmodelos")]
+        public ActionResult Actualizar_Modelos(ModelosRequest modelosRequest)
+        {
+            var vins = this.ModelosService.Actualizar_Modelos(modelosRequest);
+            return Ok(vins);
+        }
+
+
         [HttpGet]
         [Route("/v1/modelos/listarModeloPorProyecto")]
         public ActionResult Listar_ModeloPorProyecto(int idProyecto)
