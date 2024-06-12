@@ -286,5 +286,68 @@ namespace Common.Database.Conexion
             }
             }
         }
+
+        public T ExecuteQuery<T>(string query, Dictionary<string, object> parameters = null)
+        {
+            using (var connection = (SqlConnection)this.databaseManager.GetNewSqlConnection(databaseId))
+            {
+                if (connection == null)
+                {
+                    throw new Exception("Failed to get a valid database connection.");
+                }
+
+                try
+                {
+                    using (SqlCommand cmd = connection.CreateCommand())
+                    {
+                        cmd.CommandText = query;
+
+                        // Agregar los parámetros si existen
+                        if (parameters != null)
+                        {
+                            foreach (var param in parameters)
+                            {
+                                cmd.Parameters.AddWithValue("@" + param.Key, param.Value);
+                            }
+                        }
+
+                        safeOpen(connection);
+
+                        if (typeof(T) == typeof(int) || typeof(T) == typeof(string) || typeof(T) == typeof(decimal) || typeof(T).IsValueType)
+                        {
+                            // Para tipos de datos simples
+                            return (T)Convert.ChangeType(cmd.ExecuteScalar(), typeof(T));
+                        }
+                        else
+                        {
+                            // Para entidades complejas
+                            using (var reader = cmd.ExecuteReader())
+                            {
+                                if (reader.Read())
+                                {
+                                    var obj = Activator.CreateInstance<T>();
+                                    foreach (var prop in typeof(T).GetProperties())
+                                    {
+                                        if (!reader.IsDBNull(reader.GetOrdinal(prop.Name)))
+                                        {
+                                            prop.SetValue(obj, reader[prop.Name]);
+                                        }
+                                    }
+                                    return obj;
+                                }
+                                else
+                                {
+                                    return default(T);
+                                }
+                            }
+                        }
+                    }
+                }
+                catch (Exception exception)
+                {
+                    throw new Exception("Failed to execute query:", exception);
+                }
+            }
+        }
     }
 }

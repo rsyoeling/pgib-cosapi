@@ -94,6 +94,7 @@ namespace Api.Repository.Impl
                             { "parametro", "'" + item.parametro + "'"},
                             { "valor", "'" + item.valor + "'"},
                             { "estado", "'1'" },
+                            { "nroVersion", "'1'" },
                             { "usuarioCreacion", modelosRequest.usuarioCreacion },
                             { "fechaCreacion",  "'" + modelosRequest.fechaCreacion + "'"  }
                         };
@@ -115,6 +116,91 @@ namespace Api.Repository.Impl
         }
 
         public ObjectResult Actualizar_Modelos(ModelosRequest modelosRequest)
+        {
+            ObjectResult result = new ObjectResult();
+            try
+            {
+                int IdInsertada = 0;
+                int idParametrizado = 0;
+                var tableName = "Modelos";
+                string query = "";
+
+                var dataParam = new Dictionary<string, object>
+                    {
+                        { "disciplina",  modelosRequest.disciplina },
+                        { "usuarioModificacion", modelosRequest.usuarioModificacion },
+                        { "fechaModificacion", modelosRequest.fechaModificacion  }
+                    };
+
+                var condition = " idModelo=" + modelosRequest.idModelo;
+                IdInsertada = this.databaseManager.LookupDatabaseConnectorById(ApiConstants.osilDatabaseId).UpdateData(tableName, dataParam, condition);
+
+                if (IdInsertada > 0)
+                {
+                    // Actualizar Lista anterior estado 0 como version anterior
+
+                     query = "SELECT MAX(nroversion) AS max_version FROM Parametros WHERE idModelo = @Id ";
+
+                
+                    int nivelAnterior = this.databaseManager.LookupDatabaseConnectorById(ApiConstants.osilDatabaseId)
+                        .ExecuteQuery<int>(query, new Dictionary<string, object> { { "Id", modelosRequest.idModelo } });
+
+
+                    if (nivelAnterior > 0)
+                    {
+                        tableName = "Parametros";
+
+                        dataParam = new Dictionary<string, object>
+                        {
+                            { "estado",  0 },
+                            { "usuarioModificacion", modelosRequest.usuarioModificacion },
+                            { "fechaModificacion", modelosRequest.fechaModificacion  }
+                        };
+
+                        condition = " nroVersion=" + nivelAnterior;
+                        IdInsertada = this.databaseManager.LookupDatabaseConnectorById(ApiConstants.osilDatabaseId).
+                            UpdateData(tableName, dataParam, condition);
+
+                        // Si retorna positivo, es decir se actualizo la version anterior
+                        if (IdInsertada > 0)
+                        {
+                            foreach (var item in modelosRequest.Parametros)
+                            {
+                                dataParam = new Dictionary<string, object>
+                                {
+                                    { "idProyectos", modelosRequest.idProyectos },
+                                    { "idModelo", modelosRequest.idModelo },
+                                    { "parametro_cosapi", "'" + item.parametro_cosapi + "'"},
+                                    { "grupo", "'" + item.grupo + "'"},
+                                    { "parametro", "'" + item.parametro + "'"},
+                                    { "valor", "'" + item.valor + "'"},
+                                    { "estado", "'1'" },
+                                    { "nroVersion", "'"+(nivelAnterior + 1)+"'"   },
+                                    { "usuarioCreacion", modelosRequest.usuarioModificacion },
+                                    { "fechaCreacion",  "'" + modelosRequest.fechaModificacion + "'"  }
+                                };
+
+                                idParametrizado = this.databaseManager.LookupDatabaseConnectorById(ApiConstants.osilDatabaseId).
+                                    InsertData(tableName, dataParam);
+                            }
+                        }
+                    }
+                }
+
+                result.code = 200000;
+                result.message = "success";
+                result.content = idParametrizado;
+
+            }
+            catch (Exception e)
+            {
+                throw new Exception("Failed to fetch Actualizar_Modelos.", e);
+            }
+            return result;
+        }
+
+        /*
+           public ObjectResult Actualizar_Modelos(ModelosRequest modelosRequest)
         {
             ObjectResult result = new ObjectResult();
             try
@@ -239,6 +325,7 @@ namespace Api.Repository.Impl
             }
             return result;
         }
+         */
 
         public List<ModeloResponse> Listar_ModeloPorProyecto(int idProyecto)
         {

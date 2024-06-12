@@ -9,6 +9,7 @@ namespace Common.Database
         Dictionary<string, object> ConnectionValidationQuery();
 
         public List<Dictionary<string, object>> SimpleQuery(String table);
+        public T ExecuteQuery<T>(string query, Dictionary<string, object> parameters = null);
 
         //public string Query(string query, object parameters = null, bool isProc = true);
 

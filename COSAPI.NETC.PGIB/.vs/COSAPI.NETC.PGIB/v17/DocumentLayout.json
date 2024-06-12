@@ -11,24 +11,12 @@
       "RelativeMoniker": "D:0:0:{5B4C6FCB-03F7-4406-B35C-DD550A61A6FB}|COSAPI.NETC.PGIB\\COSAPI.NETC.PGIB.csproj|solutionrelative:cosapi.netc.pgib\\views\\modelos\\editarparametros.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{5B4C6FCB-03F7-4406-B35C-DD550A61A6FB}|COSAPI.NETC.PGIB\\COSAPI.NETC.PGIB.csproj|c:\\users\\computer\\desktop\\pgib-cosapi\\cosapi.netc.pgib\\cosapi.netc.pgib\\views\\usuario\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{5B4C6FCB-03F7-4406-B35C-DD550A61A6FB}|COSAPI.NETC.PGIB\\COSAPI.NETC.PGIB.csproj|solutionrelative:cosapi.netc.pgib\\views\\usuario\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{5B4C6FCB-03F7-4406-B35C-DD550A61A6FB}|COSAPI.NETC.PGIB\\COSAPI.NETC.PGIB.csproj|c:\\users\\computer\\desktop\\pgib-cosapi\\cosapi.netc.pgib\\cosapi.netc.pgib\\controllers\\modeloscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{5B4C6FCB-03F7-4406-B35C-DD550A61A6FB}|COSAPI.NETC.PGIB\\COSAPI.NETC.PGIB.csproj|solutionrelative:cosapi.netc.pgib\\controllers\\modeloscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{5B4C6FCB-03F7-4406-B35C-DD550A61A6FB}|COSAPI.NETC.PGIB\\COSAPI.NETC.PGIB.csproj|c:\\users\\computer\\desktop\\pgib-cosapi\\cosapi.netc.pgib\\cosapi.netc.pgib\\models\\parametrosservices.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5B4C6FCB-03F7-4406-B35C-DD550A61A6FB}|COSAPI.NETC.PGIB\\COSAPI.NETC.PGIB.csproj|solutionrelative:cosapi.netc.pgib\\models\\parametrosservices.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{5B4C6FCB-03F7-4406-B35C-DD550A61A6FB}|COSAPI.NETC.PGIB\\COSAPI.NETC.PGIB.csproj|c:\\users\\computer\\desktop\\pgib-cosapi\\cosapi.netc.pgib\\cosapi.netc.pgib\\views\\modelos\\parametros.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{5B4C6FCB-03F7-4406-B35C-DD550A61A6FB}|COSAPI.NETC.PGIB\\COSAPI.NETC.PGIB.csproj|solutionrelative:cosapi.netc.pgib\\views\\modelos\\parametros.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{5B4C6FCB-03F7-4406-B35C-DD550A61A6FB}|COSAPI.NETC.PGIB\\COSAPI.NETC.PGIB.csproj|c:\\users\\computer\\desktop\\pgib-cosapi\\cosapi.netc.pgib\\cosapi.netc.pgib\\models\\modelosservices.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{5B4C6FCB-03F7-4406-B35C-DD550A61A6FB}|COSAPI.NETC.PGIB\\COSAPI.NETC.PGIB.csproj|solutionrelative:cosapi.netc.pgib\\models\\modelosservices.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{5B4C6FCB-03F7-4406-B35C-DD550A61A6FB}|COSAPI.NETC.PGIB\\COSAPI.NETC.PGIB.csproj|c:\\users\\computer\\desktop\\pgib-cosapi\\cosapi.netc.pgib\\cosapi.netc.pgib\\views\\proyectos\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{5B4C6FCB-03F7-4406-B35C-DD550A61A6FB}|COSAPI.NETC.PGIB\\COSAPI.NETC.PGIB.csproj|solutionrelative:cosapi.netc.pgib\\views\\proyectos\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     }
   ],
   "DocumentGroupContainers": [
@@ -53,8 +41,17 @@
               "Name": "ST:129:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
             },
             {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "ParametrosServices.cs",
+              "DocumentMoniker": "C:\\Users\\Computer\\Desktop\\pgib-cosapi\\COSAPI.NETC.PGIB\\COSAPI.NETC.PGIB\\Models\\ParametrosServices.cs",
+              "RelativeDocumentMoniker": "COSAPI.NETC.PGIB\\Models\\ParametrosServices.cs",
+              "ToolTip": "C:\\Users\\Computer\\Desktop\\pgib-cosapi\\COSAPI.NETC.PGIB\\COSAPI.NETC.PGIB\\Models\\ParametrosServices.cs",
+              "RelativeToolTip": "COSAPI.NETC.PGIB\\Models\\ParametrosServices.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAqwAoAAAAhAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-12T01:52:59.906Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -64,61 +61,9 @@
               "RelativeDocumentMoniker": "COSAPI.NETC.PGIB\\Utils\\ConstantesApp.cs",
               "ToolTip": "C:\\Users\\Computer\\Desktop\\pgib-cosapi\\COSAPI.NETC.PGIB\\COSAPI.NETC.PGIB\\Utils\\ConstantesApp.cs",
               "RelativeToolTip": "COSAPI.NETC.PGIB\\Utils\\ConstantesApp.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAUAAAAIAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAUAAAAGAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-06-11T06:00:33.061Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "Index.cshtml",
-              "DocumentMoniker": "C:\\Users\\Computer\\Desktop\\pgib-cosapi\\COSAPI.NETC.PGIB\\COSAPI.NETC.PGIB\\Views\\Usuario\\Index.cshtml",
-              "RelativeDocumentMoniker": "COSAPI.NETC.PGIB\\Views\\Usuario\\Index.cshtml",
-              "ToolTip": "C:\\Users\\Computer\\Desktop\\pgib-cosapi\\COSAPI.NETC.PGIB\\COSAPI.NETC.PGIB\\Views\\Usuario\\Index.cshtml",
-              "RelativeToolTip": "COSAPI.NETC.PGIB\\Views\\Usuario\\Index.cshtml",
-              "ViewState": "AQIAAAMAAAAAAAAAAAAAABAAAAA3AAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-06-11T05:01:41.928Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "ModelosServices.cs",
-              "DocumentMoniker": "C:\\Users\\Computer\\Desktop\\pgib-cosapi\\COSAPI.NETC.PGIB\\COSAPI.NETC.PGIB\\Models\\ModelosServices.cs",
-              "RelativeDocumentMoniker": "COSAPI.NETC.PGIB\\Models\\ModelosServices.cs",
-              "ToolTip": "C:\\Users\\Computer\\Desktop\\pgib-cosapi\\COSAPI.NETC.PGIB\\COSAPI.NETC.PGIB\\Models\\ModelosServices.cs",
-              "RelativeToolTip": "COSAPI.NETC.PGIB\\Models\\ModelosServices.cs",
-              "ViewState": "AQIAAJQAAAAAAAAAAAAiwJ8AAAANAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-11T03:21:57.501Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "Index.cshtml",
-              "DocumentMoniker": "C:\\Users\\Computer\\Desktop\\pgib-cosapi\\COSAPI.NETC.PGIB\\COSAPI.NETC.PGIB\\Views\\Proyectos\\Index.cshtml",
-              "RelativeDocumentMoniker": "COSAPI.NETC.PGIB\\Views\\Proyectos\\Index.cshtml",
-              "ToolTip": "C:\\Users\\Computer\\Desktop\\pgib-cosapi\\COSAPI.NETC.PGIB\\COSAPI.NETC.PGIB\\Views\\Proyectos\\Index.cshtml",
-              "RelativeToolTip": "COSAPI.NETC.PGIB\\Views\\Proyectos\\Index.cshtml",
-              "ViewState": "AQIAAFQAAAAAAAAAAAAAAGQAAAAWAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-06-11T02:53:00.349Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "ModelosController.cs",
-              "DocumentMoniker": "C:\\Users\\Computer\\Desktop\\pgib-cosapi\\COSAPI.NETC.PGIB\\COSAPI.NETC.PGIB\\Controllers\\ModelosController.cs",
-              "RelativeDocumentMoniker": "COSAPI.NETC.PGIB\\Controllers\\ModelosController.cs",
-              "ToolTip": "C:\\Users\\Computer\\Desktop\\pgib-cosapi\\COSAPI.NETC.PGIB\\COSAPI.NETC.PGIB\\Controllers\\ModelosController.cs",
-              "RelativeToolTip": "COSAPI.NETC.PGIB\\Controllers\\ModelosController.cs",
-              "ViewState": "AQIAAFgAAAAAAAAAAAAvwGQAAAAMAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-11T02:49:29.681Z",
               "EditorCaption": ""
             },
             {
@@ -129,14 +74,14 @@
               "RelativeDocumentMoniker": "COSAPI.NETC.PGIB\\Views\\Modelos\\EditarParametros.cshtml",
               "ToolTip": "C:\\Users\\Computer\\Desktop\\pgib-cosapi\\COSAPI.NETC.PGIB\\COSAPI.NETC.PGIB\\Views\\Modelos\\EditarParametros.cshtml",
               "RelativeToolTip": "COSAPI.NETC.PGIB\\Views\\Modelos\\EditarParametros.cshtml",
-              "ViewState": "AQIAAFMBAAAAAAAAAAAWwGMBAABHAAAA",
+              "ViewState": "AQIAAG0CAAAAAAAAAAAmwG0CAAAaAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2024-06-11T02:46:20.257Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 3,
               "Title": "Parametros.cshtml",
               "DocumentMoniker": "C:\\Users\\Computer\\Desktop\\pgib-cosapi\\COSAPI.NETC.PGIB\\COSAPI.NETC.PGIB\\Views\\Modelos\\Parametros.cshtml",
               "RelativeDocumentMoniker": "COSAPI.NETC.PGIB\\Views\\Modelos\\Parametros.cshtml",
@@ -144,8 +89,7 @@
               "RelativeToolTip": "COSAPI.NETC.PGIB\\Views\\Modelos\\Parametros.cshtml",
               "ViewState": "AQIAAM8CAAAAAAAAAAAWwOQCAAAbAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-06-11T02:43:13.803Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-06-11T02:43:13.803Z"
             }
           ]
         }

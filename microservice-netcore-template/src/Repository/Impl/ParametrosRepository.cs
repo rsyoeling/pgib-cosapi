@@ -33,10 +33,19 @@ namespace Api.Repository.Impl
                 parameters.Add("IdModelo", idModelo);
 
                 string query = @"
-                SELECT p.parametro_cosapi as id_parametro_cosapi, pc.descripcion as parametro_descripcion , grupo , parametro , valor
-                FROM Parametros p INNER JOIN ParametroCosapi pc
-                ON p.parametro_cosapi = pc.id_parametro_cosapi
-                WHERE p.idModelo = @IdModelo AND pc.estado = 1
+                SELECT p.parametro_cosapi as parametro_cosapi, pc.descripcion as parametro_descripcion , grupo , parametro , valor, nroversion
+                FROM Parametros p INNER JOIN ParametroCosapi pc ON p.parametro_cosapi = pc.id_parametro_cosapi
+                INNER JOIN 
+                    (
+                        SELECT  parametro_cosapi,  MAX(nroversion) AS max_version
+                        FROM  Parametros
+                        WHERE idModelo = @IdModelo
+                        GROUP BY parametro_cosapi
+                    ) max_versions
+                ON 
+                    p.parametro_cosapi = max_versions.parametro_cosapi 
+                    AND p.nroversion = max_versions.max_version
+                WHERE pc.estado = 1
                 ORDER BY p.parametro_cosapi , pc.descripcion , grupo , valor
                 ";
 

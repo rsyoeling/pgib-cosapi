@@ -475,28 +475,30 @@
         var urn = '@(vl_Modelo.urn)';
         localStorage.setItem('urn',urn);
         obtenerParametros();
-        CrearParametros();
         ListarParametrosPorModelo();
+        CrearParametros();
+        
     }
 
     function ListarParametrosPorModelo() {
+        matrizGlobal = [];
         const idModelo = '@(vl_Modelo.idModelo)';
         fetch(`@Url.Action("GetParametrosPorModelo", "Modelos")?idModelo=${idModelo}`)
             .then(response => response.json())
             .then(data => {
                 console.dir('listando parametros ...');
                 console.dir(data);
-
+                matrizGlobal = data; //Se obtiene los valores anteriores
                 const result = [];
 
                 data.forEach(item => {
                     // Buscar si el id_parametro_cosapi ya existe en el result
-                    let existingItem = result.find(x => x.id === item.id_parametro_cosapi);
+                    let existingItem = result.find(x => x.id === item.parametro_cosapi);
 
                     if (!existingItem) {
                         // Si no existe, crear un nuevo objeto
                         existingItem = {
-                            id: item.id_parametro_cosapi,
+                            id: item.parametro_cosapi,
                             descripcion: item.parametro_descripcion,
                             grupos: []
                         };
@@ -535,18 +537,30 @@
             .catch(error => console.error('Error:', error));
     }
 
+    function escapeHtml(text) {
+        const map = {
+            '&': '&amp;',
+            '<': '&lt;',
+            '>': '&gt;',
+            '"': '&quot;',
+            "'": '&#039;'
+        };
+        return text.replace(/[&<>"']/g, function (m) { return map[m]; });
+    }
+
     function PintarParametrosModelo(result) {
         const resultadoDiv = document.getElementById('resultado');
         resultadoDiv.innerHTML = '';
 
         result.forEach((item, index) => {
             let gruposHTML = item.grupos.map(grupo => {
-                let parametrosHTML = grupo.parametros.map(param => `(${param.nombre_param}: ${param.valor})`).join(' ');
-                return `[${grupo.nombre}: ${parametrosHTML}]`;
+                let parametrosHTML = grupo.parametros.map(param =>
+                    `(${escapeHtml(param.nombre_param)}: ${escapeHtml(param.valor)})`).join(' ');
+                return `[${escapeHtml(grupo.nombre)}: ${parametrosHTML}]`;
             }).join(' ');
 
             const p = document.createElement('p');
-            p.textContent = `${index + 1}. ${item.descripcion} : ${gruposHTML}`;
+            p.innerHTML = `<strong>${index + 1}. ${escapeHtml(item.descripcion)}</strong> : ${gruposHTML}`;
             resultadoDiv.appendChild(p);
         });
     }
@@ -606,6 +620,11 @@
 
         var editedValues = [];
         var seleccion = 0;
+
+        if ($('#parametrocosapi').val() == "0") {
+            swal('Advertencia', "Debe seleccionar un Parámetro Cosapi.", "error");
+            return;
+        }
 
         // Recorrer todos los textboxes para encontrar los que están habilitados y editados
         $("#valoresunicos input[type='text']").each(function () {
