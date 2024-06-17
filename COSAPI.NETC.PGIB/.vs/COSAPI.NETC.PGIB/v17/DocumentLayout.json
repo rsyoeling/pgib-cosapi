@@ -3,20 +3,12 @@
   "WorkspaceRootPath": "C:\\Users\\Computer\\Desktop\\pgib-cosapi\\COSAPI.NETC.PGIB\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{5B4C6FCB-03F7-4406-B35C-DD550A61A6FB}|COSAPI.NETC.PGIB\\COSAPI.NETC.PGIB.csproj|c:\\users\\computer\\desktop\\pgib-cosapi\\cosapi.netc.pgib\\cosapi.netc.pgib\\utils\\constantesapp.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{5B4C6FCB-03F7-4406-B35C-DD550A61A6FB}|COSAPI.NETC.PGIB\\COSAPI.NETC.PGIB.csproj|solutionrelative:cosapi.netc.pgib\\utils\\constantesapp.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{5B4C6FCB-03F7-4406-B35C-DD550A61A6FB}|COSAPI.NETC.PGIB\\COSAPI.NETC.PGIB.csproj|c:\\users\\computer\\desktop\\pgib-cosapi\\cosapi.netc.pgib\\cosapi.netc.pgib\\views\\modelos\\avance.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{5B4C6FCB-03F7-4406-B35C-DD550A61A6FB}|COSAPI.NETC.PGIB\\COSAPI.NETC.PGIB.csproj|solutionrelative:cosapi.netc.pgib\\views\\modelos\\avance.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{5B4C6FCB-03F7-4406-B35C-DD550A61A6FB}|COSAPI.NETC.PGIB\\COSAPI.NETC.PGIB.csproj|c:\\users\\computer\\desktop\\pgib-cosapi\\cosapi.netc.pgib\\cosapi.netc.pgib\\views\\modelos\\editarparametros.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{5B4C6FCB-03F7-4406-B35C-DD550A61A6FB}|COSAPI.NETC.PGIB\\COSAPI.NETC.PGIB.csproj|solutionrelative:cosapi.netc.pgib\\views\\modelos\\editarparametros.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{5B4C6FCB-03F7-4406-B35C-DD550A61A6FB}|COSAPI.NETC.PGIB\\COSAPI.NETC.PGIB.csproj|c:\\users\\computer\\desktop\\pgib-cosapi\\cosapi.netc.pgib\\cosapi.netc.pgib\\models\\parametrosservices.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{5B4C6FCB-03F7-4406-B35C-DD550A61A6FB}|COSAPI.NETC.PGIB\\COSAPI.NETC.PGIB.csproj|solutionrelative:cosapi.netc.pgib\\models\\parametrosservices.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{5B4C6FCB-03F7-4406-B35C-DD550A61A6FB}|COSAPI.NETC.PGIB\\COSAPI.NETC.PGIB.csproj|c:\\users\\computer\\desktop\\pgib-cosapi\\cosapi.netc.pgib\\cosapi.netc.pgib\\views\\modelos\\parametros.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{5B4C6FCB-03F7-4406-B35C-DD550A61A6FB}|COSAPI.NETC.PGIB\\COSAPI.NETC.PGIB.csproj|solutionrelative:cosapi.netc.pgib\\views\\modelos\\parametros.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{5B4C6FCB-03F7-4406-B35C-DD550A61A6FB}|COSAPI.NETC.PGIB\\COSAPI.NETC.PGIB.csproj|c:\\users\\computer\\desktop\\pgib-cosapi\\cosapi.netc.pgib\\cosapi.netc.pgib\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{5B4C6FCB-03F7-4406-B35C-DD550A61A6FB}|COSAPI.NETC.PGIB\\COSAPI.NETC.PGIB.csproj|solutionrelative:cosapi.netc.pgib\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     }
   ],
   "DocumentGroupContainers": [
@@ -26,7 +18,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 4,
+          "SelectedChildIndex": 3,
           "Children": [
             {
               "$type": "Bookmark",
@@ -37,59 +29,30 @@
               "Name": "ST:0:0:{eefa5220-e298-11d0-8f78-00a0c9110057}"
             },
             {
-              "$type": "Bookmark",
-              "Name": "ST:129:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
-            },
-            {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "ParametrosServices.cs",
-              "DocumentMoniker": "C:\\Users\\Computer\\Desktop\\pgib-cosapi\\COSAPI.NETC.PGIB\\COSAPI.NETC.PGIB\\Models\\ParametrosServices.cs",
-              "RelativeDocumentMoniker": "COSAPI.NETC.PGIB\\Models\\ParametrosServices.cs",
-              "ToolTip": "C:\\Users\\Computer\\Desktop\\pgib-cosapi\\COSAPI.NETC.PGIB\\COSAPI.NETC.PGIB\\Models\\ParametrosServices.cs",
-              "RelativeToolTip": "COSAPI.NETC.PGIB\\Models\\ParametrosServices.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAqwAoAAAAhAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-12T01:52:59.906Z",
+              "DocumentIndex": 1,
+              "Title": "_Layout.cshtml",
+              "DocumentMoniker": "C:\\Users\\Computer\\Desktop\\pgib-cosapi\\COSAPI.NETC.PGIB\\COSAPI.NETC.PGIB\\Views\\Shared\\_Layout.cshtml",
+              "RelativeDocumentMoniker": "COSAPI.NETC.PGIB\\Views\\Shared\\_Layout.cshtml",
+              "ToolTip": "C:\\Users\\Computer\\Desktop\\pgib-cosapi\\COSAPI.NETC.PGIB\\COSAPI.NETC.PGIB\\Views\\Shared\\_Layout.cshtml",
+              "RelativeToolTip": "COSAPI.NETC.PGIB\\Views\\Shared\\_Layout.cshtml",
+              "ViewState": "AQIAAHkAAAAAAAAAAAAmwIMAAABdAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-06-17T02:26:39.487Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "ConstantesApp.cs",
-              "DocumentMoniker": "C:\\Users\\Computer\\Desktop\\pgib-cosapi\\COSAPI.NETC.PGIB\\COSAPI.NETC.PGIB\\Utils\\ConstantesApp.cs",
-              "RelativeDocumentMoniker": "COSAPI.NETC.PGIB\\Utils\\ConstantesApp.cs",
-              "ToolTip": "C:\\Users\\Computer\\Desktop\\pgib-cosapi\\COSAPI.NETC.PGIB\\COSAPI.NETC.PGIB\\Utils\\ConstantesApp.cs",
-              "RelativeToolTip": "COSAPI.NETC.PGIB\\Utils\\ConstantesApp.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAUAAAAGAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-11T06:00:33.061Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "EditarParametros.cshtml",
-              "DocumentMoniker": "C:\\Users\\Computer\\Desktop\\pgib-cosapi\\COSAPI.NETC.PGIB\\COSAPI.NETC.PGIB\\Views\\Modelos\\EditarParametros.cshtml",
-              "RelativeDocumentMoniker": "COSAPI.NETC.PGIB\\Views\\Modelos\\EditarParametros.cshtml",
-              "ToolTip": "C:\\Users\\Computer\\Desktop\\pgib-cosapi\\COSAPI.NETC.PGIB\\COSAPI.NETC.PGIB\\Views\\Modelos\\EditarParametros.cshtml",
-              "RelativeToolTip": "COSAPI.NETC.PGIB\\Views\\Modelos\\EditarParametros.cshtml",
-              "ViewState": "AQIAAG0CAAAAAAAAAAAmwG0CAAAaAAAA",
+              "Title": "Avance.cshtml",
+              "DocumentMoniker": "C:\\Users\\Computer\\Desktop\\pgib-cosapi\\COSAPI.NETC.PGIB\\COSAPI.NETC.PGIB\\Views\\Modelos\\Avance.cshtml",
+              "RelativeDocumentMoniker": "COSAPI.NETC.PGIB\\Views\\Modelos\\Avance.cshtml",
+              "ToolTip": "C:\\Users\\Computer\\Desktop\\pgib-cosapi\\COSAPI.NETC.PGIB\\COSAPI.NETC.PGIB\\Views\\Modelos\\Avance.cshtml",
+              "RelativeToolTip": "COSAPI.NETC.PGIB\\Views\\Modelos\\Avance.cshtml",
+              "ViewState": "AQIAAC4AAAAAAAAAAAAmwDUAAAAzAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-06-11T02:46:20.257Z",
+              "WhenOpened": "2024-06-15T22:00:37.247Z",
               "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "Parametros.cshtml",
-              "DocumentMoniker": "C:\\Users\\Computer\\Desktop\\pgib-cosapi\\COSAPI.NETC.PGIB\\COSAPI.NETC.PGIB\\Views\\Modelos\\Parametros.cshtml",
-              "RelativeDocumentMoniker": "COSAPI.NETC.PGIB\\Views\\Modelos\\Parametros.cshtml",
-              "ToolTip": "C:\\Users\\Computer\\Desktop\\pgib-cosapi\\COSAPI.NETC.PGIB\\COSAPI.NETC.PGIB\\Views\\Modelos\\Parametros.cshtml",
-              "RelativeToolTip": "COSAPI.NETC.PGIB\\Views\\Modelos\\Parametros.cshtml",
-              "ViewState": "AQIAAM8CAAAAAAAAAAAWwOQCAAAbAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-06-11T02:43:13.803Z"
             }
           ]
         }

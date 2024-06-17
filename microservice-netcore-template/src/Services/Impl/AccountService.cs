@@ -37,6 +37,7 @@ namespace Api.Services.Impl
                 throw new Exception("Failed to fetch Login.", ex);
             }
         }
+
         public ObjectResult MenuSubmenu(int idRol)
         {
             try

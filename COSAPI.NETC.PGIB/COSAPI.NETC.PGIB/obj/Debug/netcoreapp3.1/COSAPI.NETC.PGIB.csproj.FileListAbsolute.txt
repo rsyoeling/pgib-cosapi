@@ -507,3 +507,4 @@ C:\Users\Computer\Desktop\pgib-cosapi\COSAPI.NETC.PGIB\COSAPI.NETC.PGIB\obj\Debu
 C:\Users\Computer\Desktop\pgib-cosapi\COSAPI.NETC.PGIB\COSAPI.NETC.PGIB\obj\Debug\netcoreapp3.1\COSAPI.NETC.PGIB.pdb
 C:\Users\Computer\Desktop\pgib-cosapi\COSAPI.NETC.PGIB\COSAPI.NETC.PGIB\obj\Debug\netcoreapp3.1\COSAPI.NETC.PGIB.genruntimeconfig.cache
 C:\Users\Computer\Desktop\pgib-cosapi\COSAPI.NETC.PGIB\COSAPI.NETC.PGIB\obj\Debug\netcoreapp3.1\Razor\Views\Modelos\EditarParametros.cshtml.g.cs
+C:\Users\Computer\Desktop\pgib-cosapi\COSAPI.NETC.PGIB\COSAPI.NETC.PGIB\obj\Debug\netcoreapp3.1\Razor\Views\Modelos\Avance.cshtml.g.cs

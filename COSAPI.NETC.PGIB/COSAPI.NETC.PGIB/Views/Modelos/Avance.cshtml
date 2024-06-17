@@ -1,0 +1,209 @@
+﻿@{
+    ModeloResponse vl_Modelo = ViewBag.modelo;
+}
+
+<style>
+    .handleSelectionExtensionIcon {
+        background-image: url(/img/dar_avance_white.png);
+        background-size: 24px;
+        background-repeat: no-repeat;
+        background-position: center;
+    }
+
+</style>
+
+<div class="content">
+    <div class="content h-100">
+        <div class="row">
+            <div class="col-md-6 ">
+                <!-- Form inputs -->
+                <div class="card h-100">
+                    <div class="card-header header-elements-inline">
+                        <h5 class="card-title">Modelo: </h5>
+                        <div class="header-elements">
+                            <div class="list-icons">
+                                <a class="list-icons-item" data-action="collapse"></a>
+                                <a class="list-icons-item" data-action="reload" onclick="CargarDatosIniciales()"></a>
+                                <a class="list-icons-item" data-action="remove"></a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card-body " style="padding: 0px; height: 100vh">
+                        
+                        <div class="h-100" id="viewer"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card h-100">
+                    <div class="card-header header-elements-inline">
+                        <h5 class="card-title">Información del Modelo</h5>
+                      
+                        <div class="header-elements">
+                            <div class="list-icons">
+                                <a class="list-icons-item" data-action="collapse"></a>
+                                <a onclick="ListarAvancesPorModelo()" class="list-icons-item" data-action="reload"></a>
+                                <a class="list-icons-item" data-action="remove"></a>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="card-body">
+                        <div class="container-fluid">
+                            <div id="table-responsive">
+                                <table id="tabla" class="table table-bordered table-hover table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>ELEMENTO</th>
+                                            <th>AVANCE</th>
+                                            <th>ESTADO AVANCE</th>
+                                            <th>FECHA EJECUTADA</th>
+                                            <th>FECHA PLANIFICADA</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="resultado">
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="modalCRUD1" class="modal fade" tabindex="-1" role="dialog"
+             aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel"></h5>
+                    </div>
+                    <form id="formArticulos1">
+                        <div class="modal-body">
+                            <input id="id" hidden>
+
+                            <label for="" class="col-form-label">
+                                AVANCE PARA LOS ELEMENTOS
+                                SELECCIONADOS (en porcentaje de 0 a 10):
+                            </label>
+                            <input type="number" class="form-control" id="txtAvance" min="0" max="10">
+                            <label for="" class="col-form-label">Estado avance:</label>
+                            <input type="text" class="form-control" id="txtEstadoAvance">
+                            <label for="" class="col-form-label">Fecha Ejecutada</label>
+                            <input type="date" class="form-control" id="f_ejecucion">
+                            <label for="" class="col-form-label">Fecha Planificada</label>
+                            <input type="date" class="form-control" id="f_planificada">
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary"
+                                    data-dismiss="modal">
+                                Cancelar
+                            </button>
+                            <input type="hidden" name="id_modelo" id="id_modelo" value="@(vl_Modelo.idModelo)" />
+                            <button type="submit" id="btnGuardar" class="btn btn-dark">Guardar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        CargarDatosIniciales();
+    });
+
+    function CargarDatosIniciales(){
+        var urn = '@(vl_Modelo.urn)';
+        localStorage.setItem('urn', urn);
+        var urn = localStorage.getItem("urn");
+       
+        GenerarToken();
+        launchViewer(urn);
+        ListarAvancesPorModelo();
+    }
+
+
+    function GenerarToken(){
+        var token = "";
+        var url = "https://developer.api.autodesk.com/authentication/v1/authenticate";
+        var data = {
+            "client_id": "wIHjqGVk5Geso1ZGaLFpsqU0UiX7UP4j",
+            "client_secret": "4nc2icC3F8fKlQkX",
+            "grant_type": "client_credentials",
+            "scope": "code:all data:write data:read bucket:create bucket:delete bucket:read"
+        };
+        $.ajax({
+            url: url,
+            type: "POST",
+            data: data,
+            success: function (data) {
+                token = data.access_token;
+                localStorage.setItem("token", 'Bearer ' + token);
+            },
+            error: function (data) {
+                console.log(data);
+            }
+        });
+    }
+
+    function ListarAvancesPorModelo() {
+    
+        const idModelo = '@(vl_Modelo.idModelo)';
+        fetch(`@Url.Action("ListarAvancesPorModelo", "Modelos")?idModelo=${idModelo}`)
+            .then(response => response.json())
+            .then(data => {
+                console.dir(data);
+                var resultado = '';
+
+                for (var i in data) {
+                    var item = data[i];
+                    resultado += `
+                        <tr>
+                                <td> ${item.elemento} </td>
+                                <td> ${item.avance} </td>
+                                <td> ${item.e_avance} </td>
+                                <td> ${item.f_ejecucion} </td>
+                                <td> ${item.f_planificada} </td>
+                        </tr>
+                    `;
+                }
+
+               
+                fnDestruirTabla('tabla');
+                $('#resultado').html(resultado);
+                fnCrearDataTable('tabla');
+            })
+            .catch(error => console.error('Error:', error));
+    }
+
+    function fnDestruirTabla(id) {
+        $('#' + id).DataTable().destroy();
+    }
+
+    function fnCrearDataTable(id) {
+        $('#' + id).DataTable({
+            language: {
+                "lengthMenu": "Mostrar _MENU_ registros",
+                "zeroRecords": "No se encontraron resultados",
+                "info": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+                "infoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
+                "infoFiltered": "(filtrado de un total de _MAX_ registros)",
+                "sSearch": "Buscar:",
+                "oPaginate": {
+                    "sFirst": "Primero",
+                    "sLast": "Último",
+                    "sNext": "Siguiente",
+                    "sPrevious": "Anterior"
+                },
+                "sProcessing": "Procesando..."
+            },
+            responsive: "true",
+            retrieve: true
+        });
+    }
+</script>

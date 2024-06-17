@@ -55,7 +55,7 @@ namespace COSAPI.NETC.PGIB.Controllers
                 var descripcion = HttpContext.Request.Form["descripcionInput"];
                 var file = HttpContext.Request.Form.Files["imageFile"];
                 DateTime fechaActual = DateTime.Now;
-                string fechaFormateada = fechaActual.ToString("yyyy/MM/dd HH:mm");
+                string fechaFormateada = fechaActual.ToString("yyyy-MM-dd HH:mm:ss");
 
                 var resultado = "";
                 ProyectosRequest proyectosRequest = new ProyectosRequest();

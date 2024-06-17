@@ -34,7 +34,7 @@ class MyAwesomeExtension extends Autodesk.Viewing.Extension {
       this._group = this.viewer.toolbar.getControl('allMyAwesomeExtensionsToolbar');
       if (!this._group) {
           this._group = new Autodesk.Viewing.UI.ControlGroup('allMyAwesomeExtensionsToolbar');
-          this.viewer.toolbar.addControl(this._group);
+         // this.viewer.toolbar.addControl(this._group);
       }
       var table = $('#tablaArticulos').DataTable();
       // Add a new button to the toolbar group
@@ -148,10 +148,10 @@ class MyAwesomeExtension extends Autodesk.Viewing.Extension {
         
         
     };
-      this._button.setToolTip('Visualizar Avance');
-      this._button.addClass('myAwesomeExtensionIcon');
-      this._group.addControl(this._button);
+   //   this._button.setToolTip('Visualizar Avance');
+    //  this._button.addClass('myAwesomeExtensionIcon');
+    //  this._group.addControl(this._button);
   }
 }
 
-Autodesk.Viewing.theExtensionManager.registerExtension('MyAwesomeExtension', MyAwesomeExtension);
+//Autodesk.Viewing.theExtensionManager.registerExtension('MyAwesomeExtension', MyAwesomeExtension);

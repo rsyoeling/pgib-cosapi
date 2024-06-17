@@ -61,7 +61,7 @@ class HandleSelectionExtension extends Autodesk.Viewing.Extension {
                 var busqueda ="";
                 var isolated = [];
                 // Iterate through the list of selected dbIds
-                var uri = "http://localhost:3500/updateAvanceExtIdacero";
+                var uri = "/Modelos/DarAvancesModelo";
                 
                 selection.forEach((dbId) => {
                     console.log(selection.length);
@@ -88,52 +88,68 @@ class HandleSelectionExtension extends Autodesk.Viewing.Extension {
                         console.log(elementos); */
                         $('#formArticulos1').submit(function (e) {
                             e.preventDefault();
-                            let avance = $.trim($('#txtAvance').val());
-                            let e_avance = $('#txtEstadoAvance').val();
-                            let f_ejecucion = document.getElementById('f_ejecucion').value;
-                            let f_planificada = document.getElementById('f_planificada').value;
-                            
-                            if (f_ejecucion == null){
-                                f_ejecucion = '0000-00-00'
-                            }
-                            if (f_planificada == null){
-                                f_planificada = '0000-00-00'
-                            }
-                            console.log(avance + ' ' + e_avance + ' ' + f_ejecucion + ' ' + f_planificada + ' ' + elementos);
                             //console.log(avance);
                             //console.log(fecha);
-                            elementos.forEach(function(elemento, indice,array){
-                                $.ajax({
-                                  url: uri,
-                                  //url: 'http://srvscopepru:3500/updateAvanceExtId',
-                                  method: 'put',
-                                  contentType: 'application/json',
-                                  data: JSON.stringify({ avance: avance, e_avance: e_avance, id_elemento: elemento , f_ejecutada : f_ejecucion }),
-                                  dataType: "json",
-                                  //mostrar modal de carga
-                                    beforeSend: function () {
-                                        //new pNotify({ title: 'Cargando', text: 'Espere un momento por favor', type: 'info', styling: 'bootstrap3' });
-                                    },
-                                  success: function (data) {
-                                    $('#modalCarga').modal('hide');
-                                      //var resp = JSON.parse(data)
-                                      //tablaArticulos.ajax.reload(null, false);
-                                      console.log('Elementos actualizados');
-                                        
-                                  }
-                              })
+                            elementos.forEach(function (elemento, indice, array) {
+                                let avance = $.trim($('#txtAvance').val());
+                                let e_avance = $('#txtEstadoAvance').val();
+                                let f_ejecucion = document.getElementById('f_ejecucion').value;
+                                let f_planificada = document.getElementById('f_planificada').value;
+                                let id_modelo = document.getElementById('id_modelo').value;
+                                
+                                if (f_ejecucion == null) {
+                                    f_ejecucion = '0000-00-00'
+                                }
+                                if (f_planificada == null) {
+                                    f_planificada = '0000-00-00'
+                                }
+                                console.log(avance + ' ' + e_avance + ' ' + f_ejecucion + ' ' + f_planificada + ' ' +
+                                    elementos);
+                              
+                  
+                                    $.ajax({
+                                      url: uri,
+
+                                        method: 'get',
+                                        data: {
+                                            avance: avance,
+                                            e_avance: e_avance,
+                                            id_elemento: elemento,
+                                            f_planificada: f_planificada,
+                                            f_ejecucion: f_ejecucion,
+                                            id_modelo: id_modelo
+                                        },
+                                        dataType: "json",
+                                        success: function (data) {
+                                            if (data.content > 0) {
+                                                $('#modalCarga').modal('hide');
+                                                //var resp = JSON.parse(data)
+                                                //tablaArticulos.ajax.reload(null, false);
+                                               
+                                                $('#modalCRUD1').modal('hide');
+                                                new PNotify({
+                                                    title: 'Actualizando...',
+                                                    text: 'Se actualizo elemento.',
+                                                    addclass: 'bg-success border-success'
+                                                });
+                                                //   mi_visor.clearSelection();
+                                                ListarAvancesPorModelo();
+                                            } else {
+                                                new PNotify({
+                                                    title: 'Actualizando...',
+                                                    text: 'Se actualizo elemento.',
+                                                    addclass: 'bg-info'
+                                                });
+                                            }
+                                      }
+                                  })
                               });
 
                             /* table.ajax.reload(); */
-                            $('#modalCRUD1').modal('hide');
-                            new PNotify({
-                                title: 'Actualizando...',
-                                text: 'Se actualizaron ' + elementos.length + ' elementos.',
-                                addclass: 'bg-success border-success'
-                            });
+                            
                             //new pNotify({ title: 'Actualizado', text: 'Se actualizaron' + elementos.length + 'elementos.', type: 'success', styling: 'bootstrap3' });  
                             //swal("Actualizado!", "Elementos actualizados", "success");
-                            mi_visor.clearSelection();
+                          
                         
                         
                           /* this.viewer.isolate(selection.dbId); */

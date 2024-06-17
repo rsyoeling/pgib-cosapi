@@ -1,4 +1,5 @@
-﻿using COSAPI.NETC.PGIB.Models;
+﻿using COSAPI.NETC.PGIB.Entities;
+using COSAPI.NETC.PGIB.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
@@ -100,9 +101,52 @@ namespace COSAPI.NETC.PGIB.Controllers
         {
             DateTime fechaActual = DateTime.Now;
             modelosRequest.usuarioModificacion = idUsuario;
-            modelosRequest.fechaModificacion = fechaActual.ToString("yyyy-MM-dd HH:mm");
+            modelosRequest.fechaModificacion = fechaActual.ToString("yyyy-MM-dd HH:mm:ss");
             var resultado = ModelosServices.Actualizar_Modelo(modelosRequest);
             return Ok(resultado);
+        }
+
+
+        [HttpGet]
+        [Route("modelos/Avance/{idModelo}")]
+        public IActionResult Avance(int idModelo)
+        {
+            string menuSubmenu = AccountServices.Cargar_Menu_SubMenu_Por_Rol(idRol);
+            Models.ObjectResultMS Model = JsonConvert.DeserializeObject<Models.ObjectResultMS>(menuSubmenu);
+            ModeloResponse objModelo = ModelosServices.Buscar_ModeloPorId(idModelo);
+
+            if (objModelo != null)
+            {
+                ViewBag.IdModelo = idModelo;
+                ViewBag.modelo = objModelo;
+                return View(Model);
+            }
+
+            return Redirect("/Proyectos/Index");
+        }
+
+
+        public JsonResult DarAvancesModelo(int id_modelo, int avance, string e_avance, int id_elemento, 
+            string f_ejecucion, string f_planificada)
+        {
+            DateTime fechaActual = DateTime.Now;
+            Avance obj = new Avance();
+            obj.id_modelo = id_modelo;
+            obj.avance = avance;
+            obj.e_avance = e_avance;
+            obj.elemento = id_elemento;
+            obj.f_ejecucion = f_ejecucion;
+            obj.f_planificada = f_planificada;
+            obj.id_usuarioCreacion = idUsuario;
+
+            ObjectResultEntity result = AvanceServices.GuardarAvance(obj);
+            return Json(result);
+        }
+
+        public JsonResult ListarAvancesPorModelo(int idModelo)
+        {
+            var result = AvanceServices.ListarAvancesPorModelo(idModelo);
+            return Json(result);
         }
     }
 }

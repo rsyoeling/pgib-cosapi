@@ -70,9 +70,9 @@ class SummaryIcon extends Autodesk.Viewing.Extension {
             });
             this.viewer.isolate(ids);
         };
-        this._button.setToolTip('Buscar elemento');
-        this._button.addClass('modelSummaryIcon');
-        this._group.addControl(this._button);
+      //  this._button.setToolTip('Buscar elemento');
+      //  this._button.addClass('modelSummaryIcon');
+       // this._group.addControl(this._button);
     }
 }
 

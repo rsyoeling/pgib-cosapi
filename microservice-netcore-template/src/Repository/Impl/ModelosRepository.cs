@@ -46,7 +46,7 @@ namespace Api.Repository.Impl
                     { "modeloversion", 1 }, //lógica backend modelosRequest.modeloversion
                     { "estado", "'1'" },
                     { "usuarioCreacion", modelosRequest.usuarioCreacion },
-                    { "fechaCreacion", "'" + modelosRequest.fechaCreacion + "'" },
+                    { "fechaCreacion", "GETDATE()" },
                 };
 
                 string query = @"
@@ -65,7 +65,7 @@ namespace Api.Repository.Impl
                         { "estatus",  modelosRequest.estatus  },
                         { "urn", modelosRequest.urn},
                         { "usuarioModificacion", modelosRequest.usuarioCreacion },
-                        { "fechaModificacion", modelosRequest.fechaCreacion  }
+                        { "fechaModificacion", "GETDATE()"  }
                     };
                     var condition = " idProyectos=" + modelosRequest.idProyectos;
                     IdInsertada = this.databaseManager.LookupDatabaseConnectorById(ApiConstants.osilDatabaseId).UpdateData(tableName, data , condition);
@@ -96,7 +96,7 @@ namespace Api.Repository.Impl
                             { "estado", "'1'" },
                             { "nroVersion", "'1'" },
                             { "usuarioCreacion", modelosRequest.usuarioCreacion },
-                            { "fechaCreacion",  "'" + modelosRequest.fechaCreacion + "'"  }
+                            { "fechaCreacion",  "GETDATE()"  }
                         };
 
                         idParametrizado = this.databaseManager.LookupDatabaseConnectorById(ApiConstants.osilDatabaseId).InsertData(tableParam, dataParam);
@@ -133,7 +133,8 @@ namespace Api.Repository.Impl
                     };
 
                 var condition = " idModelo=" + modelosRequest.idModelo;
-                IdInsertada = this.databaseManager.LookupDatabaseConnectorById(ApiConstants.osilDatabaseId).UpdateData(tableName, dataParam, condition);
+                IdInsertada = this.databaseManager.LookupDatabaseConnectorById(ApiConstants.osilDatabaseId).
+                    UpdateData(tableName, dataParam, condition);
 
                 if (IdInsertada > 0)
                 {
@@ -154,7 +155,7 @@ namespace Api.Repository.Impl
                         {
                             { "estado",  0 },
                             { "usuarioModificacion", modelosRequest.usuarioModificacion },
-                            { "fechaModificacion", modelosRequest.fechaModificacion  }
+                            { "fechaModificacion",  "'" + modelosRequest.fechaModificacion + "'" }
                         };
 
                         condition = " nroVersion=" + nivelAnterior;
@@ -177,7 +178,7 @@ namespace Api.Repository.Impl
                                     { "estado", "'1'" },
                                     { "nroVersion", "'"+(nivelAnterior + 1)+"'"   },
                                     { "usuarioCreacion", modelosRequest.usuarioModificacion },
-                                    { "fechaCreacion",  "'" + modelosRequest.fechaModificacion + "'"  }
+                                    { "fechaCreacion",  "GETDATE()"}
                                 };
 
                                 idParametrizado = this.databaseManager.LookupDatabaseConnectorById(ApiConstants.osilDatabaseId).

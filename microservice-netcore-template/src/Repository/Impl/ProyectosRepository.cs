@@ -65,7 +65,7 @@ namespace Api.Repository.Impl
                     { "estado", "'1'" },
                     { "imagen", "'" + proyectosRequest.imagen + "'" },
                     { "usuarioCreacion", proyectosRequest.usuarioCreacion },
-                    { "fechaCreacion", "'" + proyectosRequest.fechaCreacion + "'" }
+                    { "fechaCreacion", "GETDATE()" }
                 };
 
                 int IdInsertada = this.databaseManager.LookupDatabaseConnectorById(ApiConstants.osilDatabaseId).InsertDataId(tableName, data);
@@ -78,7 +78,7 @@ namespace Api.Repository.Impl
                         { "idProyectos", IdInsertada },
                         { "acceso", "'1'"},
                         { "usuarioCreacion", proyectosRequest.usuarioCreacion },
-                        { "fechaCreacion", "'" + proyectosRequest.fechaCreacion + "'" }
+                        { "fechaCreacion", "GETDATE()" }
                     };
 
                     idAsignado = this.databaseManager.LookupDatabaseConnectorById(ApiConstants.osilDatabaseId).InsertData(tableAcceso, dataAcceso);
