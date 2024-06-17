@@ -3,6 +3,10 @@
   "WorkspaceRootPath": "C:\\Users\\Computer\\Desktop\\pgib-cosapi\\COSAPI.NETC.PGIB\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{5B4C6FCB-03F7-4406-B35C-DD550A61A6FB}|COSAPI.NETC.PGIB\\COSAPI.NETC.PGIB.csproj|c:\\users\\computer\\desktop\\pgib-cosapi\\cosapi.netc.pgib\\cosapi.netc.pgib\\utils\\constantesapp.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5B4C6FCB-03F7-4406-B35C-DD550A61A6FB}|COSAPI.NETC.PGIB\\COSAPI.NETC.PGIB.csproj|solutionrelative:cosapi.netc.pgib\\utils\\constantesapp.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{5B4C6FCB-03F7-4406-B35C-DD550A61A6FB}|COSAPI.NETC.PGIB\\COSAPI.NETC.PGIB.csproj|c:\\users\\computer\\desktop\\pgib-cosapi\\cosapi.netc.pgib\\cosapi.netc.pgib\\views\\modelos\\avance.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{5B4C6FCB-03F7-4406-B35C-DD550A61A6FB}|COSAPI.NETC.PGIB\\COSAPI.NETC.PGIB.csproj|solutionrelative:cosapi.netc.pgib\\views\\modelos\\avance.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
@@ -18,7 +22,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Bookmark",
@@ -30,7 +34,24 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 0,
+              "Title": "ConstantesApp.cs",
+              "DocumentMoniker": "C:\\Users\\Computer\\Desktop\\pgib-cosapi\\COSAPI.NETC.PGIB\\COSAPI.NETC.PGIB\\Utils\\ConstantesApp.cs",
+              "RelativeDocumentMoniker": "COSAPI.NETC.PGIB\\Utils\\ConstantesApp.cs",
+              "ToolTip": "C:\\Users\\Computer\\Desktop\\pgib-cosapi\\COSAPI.NETC.PGIB\\COSAPI.NETC.PGIB\\Utils\\ConstantesApp.cs",
+              "RelativeToolTip": "COSAPI.NETC.PGIB\\Utils\\ConstantesApp.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAUAAAAIAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-17T04:42:44.913Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
               "Title": "_Layout.cshtml",
               "DocumentMoniker": "C:\\Users\\Computer\\Desktop\\pgib-cosapi\\COSAPI.NETC.PGIB\\COSAPI.NETC.PGIB\\Views\\Shared\\_Layout.cshtml",
               "RelativeDocumentMoniker": "COSAPI.NETC.PGIB\\Views\\Shared\\_Layout.cshtml",
@@ -43,7 +64,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "Avance.cshtml",
               "DocumentMoniker": "C:\\Users\\Computer\\Desktop\\pgib-cosapi\\COSAPI.NETC.PGIB\\COSAPI.NETC.PGIB\\Views\\Modelos\\Avance.cshtml",
               "RelativeDocumentMoniker": "COSAPI.NETC.PGIB\\Views\\Modelos\\Avance.cshtml",
