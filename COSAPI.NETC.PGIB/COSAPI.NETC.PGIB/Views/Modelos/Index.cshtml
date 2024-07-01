@@ -73,10 +73,10 @@
                             <td>${item.usuarioCreacion}</td>
                             <td>
                                 <div>
-                                    <a href="/modelos/Avance/${item.idModelo}" class="btn btn-primary btn-sm  m-1">
+                                    <a href="@ViewBag.UrlBaseFrontEnd/modelos/Avance/${item.idModelo}" class="btn btn-primary btn-sm  m-1">
                                         <i class='icon-arrow-right15'></i><i class='icon-office'></i>  Navegar
                                     </a>
-                                    <a href="/modelos/Parametros/Edit/${item.idModelo}" class="btn btn-primary btn-sm">
+                                    <a href="@ViewBag.UrlBaseFrontEnd/modelos/Parametros/Edit/${item.idModelo}" class="btn btn-primary btn-sm">
                                         <i class='icon-arrow-right15'></i><i class='icon-office'></i>  Actualizar 🔼
                                     </a>
                                     <button onclick="deletebtn(${item.idModelo}, '${item.modelo}')" id='btn-del-model' type='button' class='btn btn-danger btn-sm delete-btn'>
@@ -84,7 +84,7 @@
                                     </button>
                                 </div>
                             </td>
-                        `;
+                            `;
                     tabla.appendChild(row);
                 });
 

@@ -61,8 +61,8 @@ class HandleSelectionExtension extends Autodesk.Viewing.Extension {
                 var busqueda ="";
                 var isolated = [];
                 // Iterate through the list of selected dbIds
-                var uri = "/Modelos/DarAvancesModelo";
-                
+                var uri = "http://10.100.94.10/pgib/Modelos/DarAvancesModelo";
+                //.. cambiar al desplegar
                 selection.forEach((dbId) => {
                     console.log(selection.length);
                     // Get properties of each dbId
@@ -103,10 +103,11 @@ class HandleSelectionExtension extends Autodesk.Viewing.Extension {
                                 if (f_planificada == null) {
                                     f_planificada = '0000-00-00'
                                 }
-                                console.log(avance + ' ' + e_avance + ' ' + f_ejecucion + ' ' + f_planificada + ' ' +
+                                console.log('hola: ' + avance + ' ' + e_avance + ' ' + f_ejecucion + ' ' + f_planificada + ' ' +
                                     elementos);
                               
-                  
+                                console.log('url: ' + uri);
+
                                     $.ajax({
                                       url: uri,
 

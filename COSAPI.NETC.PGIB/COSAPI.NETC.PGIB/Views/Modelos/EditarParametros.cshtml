@@ -681,6 +681,8 @@
         modelosRequest.urn = localStorage.getItem('urn');
         modelosRequest.Parametros = matrizGlobal;
 
+        console.log("analizar: " + JSON.stringify(modelosRequest));
+
         fetch('@Url.Action("ActualizarModelo", "Modelos")', {
             method: 'POST',
             headers: {
@@ -693,7 +695,7 @@
                 console.dir('[resultado Actualizar]' , data);
                 if (data.content == 1) {
                     swal('Éxito', "Accesos actualizados.", "success").then(function () {
-                        window.location.href = "/modelos/Index/" + @(vl_Modelo.idProyectos);
+                        window.location.href = "@ViewBag.UrlBaseFrontEnd/modelos/Index/" + @(vl_Modelo.idProyectos);
                     });
                 } else {
                     swal('Error', 'Comuniquese con el área informáica.', 'error');

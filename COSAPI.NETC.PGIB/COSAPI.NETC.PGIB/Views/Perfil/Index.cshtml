@@ -1,0 +1,94 @@
+﻿<div class="card-body" style="padding: 0px;">
+    <!-- viewer html col-4-->
+    <div class="container mt-5">
+        <h1 style="margin-bottom:-0.5em;">Mantenimiento de Perfiles</h1>
+        <div class="card-body " style="padding: 0px;">
+            <!-- viewer html -->
+            <div class="container mt-5 table-responsive">
+                <!--<button id="addUserBtn" class="btn btn-primary mb-3" data-toggle="modal" data-target="#addUserModal" onclick="activarNuevo()">Añadir Usuario</button>-->
+                <table class="table table-bordered table-hover" id="tbMantUsuario">
+                    <thead>
+                        <tr style="background-color: #f2f2f2;">
+                            <th style="display: none;">idUsuario</th>
+                            <th>Nombre</th>
+                            <th>Estado</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody id="userTable">
+                            <tr>
+                                <td style="display: none;">item.idUsuario</td>
+                                <td>Administrador</td>
+                                <td>A</td>
+                                <td>
+                                    <button class="btn btn-primary edit-btn">Editar</button>
+                                    <button class="btn btn-danger delete-btn">Inactivar</button>
+                                </td>
+                            </tr>
+                        <tr>
+                            <td style="display: none;">item.idUsuario</td>
+                            <td>Operador</td>
+                            <td>A</td>
+                            <td>
+                                <button class="btn btn-primary edit-btn">Editar</button>
+                                <button class="btn btn-danger delete-btn">Inactivar</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <br />
+                <br />
+                <br />
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal" id="addUserModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Añadir Usuario</h5>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="addUserForm">
+                    <input type="hidden" class="form-control" name="IdUsuario" id="IdUsuario">
+                    <div class="form-group">
+                        <label for="Nombres">Nombres</label>
+                        <input type="text" class="form-control" name="Nombres" id="Nombres">
+                    </div>
+                    <div class="form-group">
+                        <label for="ApellidoPaterno">Apellido Paterno</label>
+                        <input type="text" class="form-control" name="ApellidoPaterno" id="ApellidoPaterno">
+                    </div>
+                    <div class="form-group">
+                        <label for="ApellidoMaterno">Apellido Materno</label>
+                        <input type="text" class="form-control" name="ApellidoMaterno" id="ApellidoMaterno">
+                    </div>
+                    <div class="form-group">
+                        <label for="Rol">Rol</label>
+                        <select class="form-control" name="Rol" id="Rol">
+                            <option value=0>--Seleccione--</option>
+                            <option value=1>Administrador</option>
+                            <option value=2>Operador</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="Usuario">Usuario</label>
+                        <input type="text" class="form-control" name="Usuario" id="Usuario">
+                    </div>
+                    <div class="form-group">
+                        <label for="Password">Contraseña</label>
+                        <input type="password" class="form-control" name="Password" id="Password">
+                    </div>
+                    <div class="form-group">
+                        <label for="Correo">Correo</label>
+                        <input type="text" class="form-control" name="Correo" id="Correo">
+                    </div>
+                    <button type="submit" class="btn btn-primary" id="BtnInsUsu">Registrar</button>
+                    <button type="submit" class="btn btn-primary" id="BtnActUsu" style="display:none;">Actualizar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

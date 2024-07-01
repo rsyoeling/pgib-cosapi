@@ -65,7 +65,8 @@
 <script>
     document.getElementById('slcRol').addEventListener('change', function () {
         var filtro = this.value;
-        fetch('/OpcionPorRol/ActualizarListado?idRol=' + filtro)
+        //fetch('/OpcionPorRol/ActualizarListado?idRol=' + filtro)
+        fetch(`@Url.Action("ActualizarListado", "OpcionPorRol")?idRol=${filtro}`)
             .then(response => response.text())
             .then(data => {
                 document.getElementById('tableAccesoPorRol').getElementsByTagName('tbody')[0].innerHTML = data; // Actualizar la tabla
@@ -122,7 +123,8 @@
         });
         //======================================================================
         //alert(JSON.stringify(listaEntidades));
-        fetch('/OpcionPorRol/ActualizarAcceso', {
+        //fetch('/OpcionPorRol/ActualizarAcceso', {
+        fetch('@Url.Action("ActualizarAcceso", "OpcionPorRol")', {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json'

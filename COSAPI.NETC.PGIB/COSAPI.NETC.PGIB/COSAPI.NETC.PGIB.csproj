@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="EPPlus" Version="7.2.0" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.5" />
     <PackageReference Include="RestSharp" Version="110.2.0" />
   </ItemGroup>
@@ -12,6 +13,7 @@
   <ItemGroup>
     <Folder Include="wwwroot\global_assets\js\plugins\tooltipster\" />
     <Folder Include="wwwroot\img_proy\" />
+    <Folder Include="wwwroot\xlsx\" />
   </ItemGroup>
 
 </Project>

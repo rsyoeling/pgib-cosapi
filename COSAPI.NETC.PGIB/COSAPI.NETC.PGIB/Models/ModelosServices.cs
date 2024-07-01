@@ -163,7 +163,7 @@ namespace COSAPI.NETC.PGIB.Models
                     MaxTimeout = -1,
                 };
                 var client = new RestClient(options);
-                var request = new RestRequest("/v1/modelos/actualizarmodelos", Method.Put);
+                var request = new RestRequest("/v1/modelos/actualizarmodelos", Method.Post);
                 request.AddHeader("Content-Type", "application/json");
 
                 var parametros = modelosRequest.Parametros.Select(item => new
@@ -257,7 +257,7 @@ namespace COSAPI.NETC.PGIB.Models
                     MaxTimeout = -1,
                 };
                 var client = new RestClient(options);
-                var request = new RestRequest($"/v1/modelos/eliminarModelo?idModelo={idModelo}", Method.Delete);
+                var request = new RestRequest($"/v1/modelos/eliminarModelo?idModelo={idModelo}", Method.Post);
                 request.AddHeader("Content-Type", "application/json");
                 RestResponse response = client.Execute(request);
                 respuesta = response.Content;

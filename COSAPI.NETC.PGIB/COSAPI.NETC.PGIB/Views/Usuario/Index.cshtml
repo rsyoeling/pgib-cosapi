@@ -119,7 +119,8 @@
         //swal('Éxito', "Usuario registrado.", "success");
         //agregarfila();
         //=================================================
-        fetch('/Usuario/InsertarUsuario', {
+        //'/Usuario/InsertarUsuario'
+        fetch('@Url.Action("InsertarUsuario", "Usuario")', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -165,7 +166,8 @@
     }
 
     function agregarfila() {
-        fetch('/Usuario/ActualizarListado')
+        //'/Usuario/ActualizarListado'
+        fetch('@Url.Action("ActualizarListado", "Usuario")')
             .then(response => response.text())
             .then(data => {
                 document.getElementById('tbMantUsuario').getElementsByTagName('tbody')[0].innerHTML = data;
@@ -177,7 +179,8 @@
         document.getElementById('BtnActUsu').style.display = 'block';
         //var userId = this.getAttribute('data-id');
         document.getElementById('IdUsuario').value = IdUsuario; //userId;
-        fetch('/Usuario/listarusuarioid?idUsuario=' + IdUsuario) //userId
+        //fetch('/Usuario/listarusuarioid?idUsuario=' + IdUsuario) //userId
+        fetch(`@Url.Action("listarusuarioid", "Usuario")?idUsuario=${IdUsuario}`) //userId
             .then(response => response.json()) //text()
             .then(data => {
                 //console.log(data);
@@ -211,8 +214,8 @@
         requestUsuario.apellidoMaterno = document.getElementById('ApellidoMaterno').value;
         requestUsuario.idRol = parseInt(valorSeleccionado);
         requestUsuario.correoElectronico = document.getElementById('Correo').value;
-
-        fetch('/Usuario/ActualizarUsuario', {
+        //'/Usuario/ActualizarUsuario'
+        fetch('@Url.Action("ActualizarUsuario", "Usuario")', {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json'
@@ -242,8 +245,8 @@
             //console.log(result["value"]);
             //result.isConfirmed
             if (result["value"]) {
-
-                fetch('/Usuario/EliminarUsuario?idUsuario=' + IdUsuario + '&estatus=' + (Estado == "A" ? 0 : 1), {
+                //fetch('/Usuario/EliminarUsuario?idUsuario=' + IdUsuario + '&estatus=' + (Estado == "A" ? 0 : 1), {
+                fetch(`@Url.Action("EliminarUsuario", "Usuario")?idUsuario=${IdUsuario}&estatus=` + (Estado == "A" ? 0 : 1), {
                     method: 'PUT'
                 })
                     .then(response => response.json())
