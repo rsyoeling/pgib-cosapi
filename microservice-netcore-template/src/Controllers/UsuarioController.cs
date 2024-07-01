@@ -49,7 +49,7 @@ namespace Api.Controllers
             return Ok(vins);
         }
 
-        [HttpPut]
+        [HttpPost]
         [Route("/v1/usuario/actualizarusuario")]
         public ActionResult ActualizarUsuario(ActUsuRequest usuarioRequest)
         {
@@ -57,7 +57,7 @@ namespace Api.Controllers
             return Ok(vact);
         }
 
-        [HttpPut]
+        [HttpPost]
         [Route("/v1/usuario/eliminarusuario")]
         public ActionResult EliminarUsuario(int idUsuario, byte estatus)
         {

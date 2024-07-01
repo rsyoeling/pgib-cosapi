@@ -33,7 +33,7 @@ namespace Api.Controllers
             var list = this.accesoService.AccesoMenu(idRol);
             return Ok(list);
         }
-        [HttpPut]
+        [HttpPost]
         [Route("/v1/acceso/actualizaracceso")]
         public ActionResult Actualizar_AccesoPorRol(AccesoRequest accesoRequest)
         {

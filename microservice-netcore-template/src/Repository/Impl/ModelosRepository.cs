@@ -133,16 +133,15 @@ namespace Api.Repository.Impl
                     };
 
                 var condition = " idModelo=" + modelosRequest.idModelo;
-                IdInsertada = this.databaseManager.LookupDatabaseConnectorById(ApiConstants.osilDatabaseId).
-                    UpdateData(tableName, dataParam, condition);
+                IdInsertada = this.databaseManager.LookupDatabaseConnectorById(ApiConstants.osilDatabaseId).UpdateData(tableName, dataParam, condition);
 
                 if (IdInsertada > 0)
                 {
                     // Actualizar Lista anterior estado 0 como version anterior
 
-                     query = "SELECT MAX(nroversion) AS max_version FROM Parametros WHERE idModelo = @Id ";
+                    query = "SELECT MAX(nroversion) AS max_version FROM Parametros WHERE idModelo = @Id ";
 
-                
+
                     int nivelAnterior = this.databaseManager.LookupDatabaseConnectorById(ApiConstants.osilDatabaseId)
                         .ExecuteQuery<int>(query, new Dictionary<string, object> { { "Id", modelosRequest.idModelo } });
 
@@ -155,7 +154,7 @@ namespace Api.Repository.Impl
                         {
                             { "estado",  0 },
                             { "usuarioModificacion", modelosRequest.usuarioModificacion },
-                            { "fechaModificacion",  "'" + modelosRequest.fechaModificacion + "'" }
+                            { "fechaModificacion", modelosRequest.fechaModificacion  }
                         };
 
                         condition = " nroVersion=" + nivelAnterior;
@@ -178,7 +177,7 @@ namespace Api.Repository.Impl
                                     { "estado", "'1'" },
                                     { "nroVersion", "'"+(nivelAnterior + 1)+"'"   },
                                     { "usuarioCreacion", modelosRequest.usuarioModificacion },
-                                    { "fechaCreacion",  "GETDATE()"}
+                                    { "fechaCreacion",  "'" + modelosRequest.fechaModificacion + "'"  }
                                 };
 
                                 idParametrizado = this.databaseManager.LookupDatabaseConnectorById(ApiConstants.osilDatabaseId).

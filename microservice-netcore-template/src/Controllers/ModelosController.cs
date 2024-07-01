@@ -36,7 +36,7 @@ namespace Api.Controllers
             return Ok(vins);
         }
 
-        [HttpPut]
+        [HttpPost]
         [Route("/v1/modelos/actualizarmodelos")]
         public ActionResult Actualizar_Modelos(ModelosRequest modelosRequest)
         {
@@ -61,7 +61,7 @@ namespace Api.Controllers
             return Ok(list);
         }
 
-        [HttpDelete]
+        [HttpPost]
         [Route("/v1/modelos/eliminarModelo")]
         public ActionResult Eliminar_Modelos(int idModelo)
         {
