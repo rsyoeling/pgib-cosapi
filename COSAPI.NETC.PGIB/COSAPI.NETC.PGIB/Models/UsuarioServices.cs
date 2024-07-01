@@ -151,7 +151,7 @@ namespace COSAPI.NETC.PGIB.Models
                     MaxTimeout = -1,
                 };
                 var client = new RestClient(options);
-                var request = new RestRequest("/v1/usuario/actualizarusuario", Method.Put);
+                var request = new RestRequest("/v1/usuario/actualizarusuario", Method.Post);
                 request.AddHeader("Content-Type", "application/json");
                 string str = "{\"idUsuario\": " + requestActUsu.idUsuario + ", \"nombres\": \"" + requestActUsu.nombres + 
                     "\", \"apellidoPaterno\": \"" + requestActUsu.apellidoPaterno + 
@@ -182,7 +182,7 @@ namespace COSAPI.NETC.PGIB.Models
                     MaxTimeout = -1,
                 };
                 var client = new RestClient(options);
-                var request = new RestRequest("/v1/usuario/eliminarusuario?idUsuario="+ idUsuario+ "&estatus="+ estatus, Method.Put);
+                var request = new RestRequest("/v1/usuario/eliminarusuario?idUsuario="+ idUsuario+ "&estatus="+ estatus, Method.Post);
                 request.AddHeader("Content-Type", "application/json");
                 //string str = "{\"idUsuario\": " + idUsuario + ", \"estatus\": " + estatus + "}";
                 //var body = str;

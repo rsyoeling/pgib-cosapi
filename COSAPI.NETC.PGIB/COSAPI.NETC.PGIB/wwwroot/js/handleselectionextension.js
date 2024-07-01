@@ -61,7 +61,8 @@ class HandleSelectionExtension extends Autodesk.Viewing.Extension {
                 var busqueda ="";
                 var isolated = [];
                 // Iterate through the list of selected dbIds
-                var uri = "http://10.100.94.10/pgib/Modelos/DarAvancesModelo";
+                var uri = "/Modelos/DarAvancesModelo";
+                //http://10.100.94.10/pgib
                 //.. cambiar al desplegar
                 selection.forEach((dbId) => {
                     console.log(selection.length);

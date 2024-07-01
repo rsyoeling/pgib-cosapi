@@ -68,14 +68,14 @@ namespace COSAPI.NETC.PGIB.Controllers
             return Ok(VBUsuarioId);
         }
 
-        [HttpPut]
+        [HttpPost]
         public IActionResult ActualizarUsuario([FromBody] RequestActUsu requestActUsu)
         {
             var resultado = UsuarioServices.Actualizar_Usuario(requestActUsu);
             return Ok(resultado);
         }
 
-        [HttpPut]
+        [HttpPost]
         public IActionResult EliminarUsuario(int idUsuario, byte estatus)
         {
             var resultado = UsuarioServices.Eliminar_Usuario(idUsuario, estatus);

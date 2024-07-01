@@ -61,7 +61,7 @@ namespace COSAPI.NETC.PGIB.Controllers
 
             return Content(html, "text/html");
         }
-        [HttpPut]
+        [HttpPost]
         public IActionResult ActualizarAcceso([FromBody] List<contentAcceso> requestAcceso) {
             
             string actualizarAcceso = "";

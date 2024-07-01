@@ -168,7 +168,7 @@ namespace COSAPI.NETC.PGIB.Models
                     MaxTimeout = -1,
                 };
                 var client = new RestClient(options);
-                var request = new RestRequest("/v1/acceso/actualizaracceso", Method.Put);
+                var request = new RestRequest("/v1/acceso/actualizaracceso", Method.Post);
                 request.AddHeader("Content-Type", "application/json");
                 string str = "{\"idRol\": " + idRol + ", \"idMenu\": " + idMenu + ", \"idSubmenu\": " + idSubmenu + ", \"acceso\": \"" + acceso + "\"}";
                 var body = str;

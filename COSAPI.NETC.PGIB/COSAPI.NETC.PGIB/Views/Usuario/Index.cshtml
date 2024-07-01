@@ -216,7 +216,7 @@
         requestUsuario.correoElectronico = document.getElementById('Correo').value;
         //'/Usuario/ActualizarUsuario'
         fetch('@Url.Action("ActualizarUsuario", "Usuario")', {
-            method: 'PUT',
+            method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
@@ -247,7 +247,7 @@
             if (result["value"]) {
                 //fetch('/Usuario/EliminarUsuario?idUsuario=' + IdUsuario + '&estatus=' + (Estado == "A" ? 0 : 1), {
                 fetch(`@Url.Action("EliminarUsuario", "Usuario")?idUsuario=${IdUsuario}&estatus=` + (Estado == "A" ? 0 : 1), {
-                    method: 'PUT'
+                    method: 'POST'
                 })
                     .then(response => response.json())
                     .then(data => {
