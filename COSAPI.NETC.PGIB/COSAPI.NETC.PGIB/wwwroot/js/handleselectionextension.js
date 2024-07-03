@@ -62,10 +62,10 @@ class HandleSelectionExtension extends Autodesk.Viewing.Extension {
                 var isolated = [];
                 // Iterate through the list of selected dbIds
                 var uri = "/Modelos/DarAvancesModelo";
-                //http://10.100.94.10/pgib
+                //https://pdesa.cosapi.com.pe/pgib
                 //.. cambiar al desplegar
                 selection.forEach((dbId) => {
-                    console.log(selection.length);
+                    console.log('num: ' + selection.length);
                     // Get properties of each dbId
                     isolated.push(dbId);
                     this.viewer.getProperties(dbId, (props) => {
@@ -91,7 +91,13 @@ class HandleSelectionExtension extends Autodesk.Viewing.Extension {
                             e.preventDefault();
                             //console.log(avance);
                             //console.log(fecha);
+
+                            let ultimoElemento;
                             elementos.forEach(function (elemento, indice, array) {
+                                ultimoElemento = elemento; // Obtener el último valor de elemento
+                            });
+                            //elementos.forEach(function (elemento, indice, array) {
+
                                 let avance = $.trim($('#txtAvance').val());
                                 let e_avance = $('#txtEstadoAvance').val();
                                 let f_ejecucion = document.getElementById('f_ejecucion').value;
@@ -116,7 +122,7 @@ class HandleSelectionExtension extends Autodesk.Viewing.Extension {
                                         data: {
                                             avance: avance,
                                             e_avance: e_avance,
-                                            id_elemento: elemento,
+                                            id_elemento: ultimoElemento, //elemento,
                                             f_planificada: f_planificada,
                                             f_ejecucion: f_ejecucion,
                                             id_modelo: id_modelo
@@ -135,7 +141,8 @@ class HandleSelectionExtension extends Autodesk.Viewing.Extension {
                                                     addclass: 'bg-success border-success'
                                                 });
                                                 //   mi_visor.clearSelection();
-                                                ListarAvancesPorModelo();
+                                                //ListarAvancesPorModelo();
+                                                location.reload();
                                             } else {
                                                 new PNotify({
                                                     title: 'Actualizando...',
@@ -145,7 +152,7 @@ class HandleSelectionExtension extends Autodesk.Viewing.Extension {
                                             }
                                       }
                                   })
-                              });
+                            //  });
 
                             /* table.ajax.reload(); */
                             

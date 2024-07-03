@@ -123,6 +123,11 @@
 
                                     </div>
                                 </div>
+                                <div class="col-md-5">
+                                    <div class="form-group">
+                                        <label id="nota"></label>
+                                    </div>
+                                </div>
                             </div>
 
                         </div>
@@ -283,9 +288,8 @@
                 const btnCargar = document.getElementById('btnCargar');
                 const btnObtenerParametros = document.getElementById('btnObtenerParámetros');
                 // Deshabilita el botón
+                btnCargar.disabled = true;
                 btnObtenerParametros.disabled = false;
-
-
             })
             .catch(error => {
                 console.error('Error al subir el archivo:', error);
@@ -402,6 +406,8 @@
                             title: 'Proceso terminado',
                             icon: 'success',
                         });
+                        const btnObtenerParametros = document.getElementById('btnObtenerParámetros');
+                        btnObtenerParametros.disabled = true;
                     })
                         .catch(function (error) {
                             // Manejar cualquier error que pueda ocurrir durante el proceso
@@ -574,12 +580,21 @@
 
                 // Obtener los títulos de cada grupo en el JSON
                 var titles = Object.keys(uniqueProperties);
-
+                let selectPoblado = false;
                 // Recorrer los títulos y mostrarlos
                 $.each(titles, function (index, title) {
                     //console.log("Título del grupo:", title);
                     $("#grupo").append('<option value="' + title + '">' + title + '</option>');
+                    selectPoblado = true;
                 });
+                if (selectPoblado) { 
+                    Swal.fire({
+                        title: 'Proceso terminado',
+                        icon: 'success',
+                    });
+                    const btnCrearParametros = document.getElementById('btncrearparametros');
+                    btnCrearParametros.disabled = true;
+                }
             })
             .catch(error => {
                 console.error('Error al obtener propiedades de objetos:', error);
@@ -704,7 +719,7 @@
 
         // Mostrar los valores editados (puedes guardarlos en localStorage o enviarlos al servidor)
         console.log("Valores global:", matrizGlobal); // Mostrar los valores globales en una alerta
-
+        $('#nota').text(JSON.stringify(matrizGlobal));
         if(seleccion > 0){
             swal('Éxito', "Asignación correcta.", "success");
         }
