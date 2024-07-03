@@ -64,8 +64,9 @@ namespace Api.Repository.Impl
                         { "disciplina",  modelosRequest.disciplina },
                         { "estatus",  modelosRequest.estatus  },
                         { "urn", modelosRequest.urn},
-                        { "usuarioModificacion", modelosRequest.usuarioCreacion },
-                        { "fechaModificacion", "GETDATE()"  }
+                        { "estado", "1"}
+                        //{ "usuarioModificacion", modelosRequest.usuarioCreacion },
+                        //{ "fechaModificacion", "GETDATE()"  }
                     };
                     var condition = " idProyectos=" + modelosRequest.idProyectos;
                     IdInsertada = this.databaseManager.LookupDatabaseConnectorById(ApiConstants.osilDatabaseId).UpdateData(tableName, data , condition);
